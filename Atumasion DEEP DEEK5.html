@@ -1,0 +1,3251 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سامانه اتوماسیون فروش | شیمی فرایند دنا</title>
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ================= تم فراگستر ================= */
+:root {
+    --fg-primary: #1B4F72;
+    --fg-primary-dark: #133B57;
+    --fg-primary-light: #2E86C1;
+    --fg-accent: #17A2B8;
+    --fg-success: #28A745;
+    --fg-danger: #DC3545;
+    --fg-warning: #FFC107;
+    --fg-info: #17A2B8;
+    --fg-bg: #F4F6F9;
+    --fg-card: #FFFFFF;
+    --fg-text: #2C3E50;
+    --fg-text-muted: #6C757D;
+    --fg-border: #DEE2E6;
+    --fg-sidebar: #1B4F72;
+    --fg-sidebar-hover: #154360;
+    --fg-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    --fg-shadow-lg: 0 4px 16px rgba(0,0,0,0.1);
+    --fg-radius: 6px;
+    --fg-header-h: 60px;
+    --fg-sidebar-w: 250px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazir', Tahoma, sans-serif; }
+body { background: var(--fg-bg); color: var(--fg-text); font-size: 14px; min-height: 100vh; transition: background 0.3s, color 0.3s; }
+
+/* ================= دارک مود ================= */
+body.dark-mode {
+    --fg-bg: #1a1d21;
+    --fg-card: #25292e;
+    --fg-text: #e4e6eb;
+    --fg-text-muted: #9ba3af;
+    --fg-border: #3a3f47;
+    --fg-sidebar: #13161a;
+    --fg-sidebar-hover: #1f2429;
+    --fg-primary: #2E86C1;
+    --fg-primary-dark: #1B4F72;
+    --fg-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    --fg-shadow-lg: 0 4px 16px rgba(0,0,0,0.5);
+}
+body.dark-mode .fg-form-group input,
+body.dark-mode .fg-form-group select,
+body.dark-mode .fg-form-group textarea,
+body.dark-mode .fg-filter-grid input,
+body.dark-mode .fg-filter-grid select {
+    background: #2d3238;
+    color: var(--fg-text);
+    border-color: var(--fg-border);
+}
+body.dark-mode .fg-table { background: var(--fg-card); }
+body.dark-mode .fg-table tbody tr:hover { background: #2d3238; }
+body.dark-mode .fg-table tbody td { color: var(--fg-text); border-bottom-color: var(--fg-border); }
+body.dark-mode .fg-btn-secondary { background: #3a3f47; color: var(--fg-text); }
+body.dark-mode .fg-modal-box { background: var(--fg-card); }
+body.dark-mode .fg-modal-foot { background: #2d3238; border-top-color: var(--fg-border); }
+body.dark-mode .fg-card, body.dark-mode .fg-stat-card,
+body.dark-mode .fg-org-node, body.dark-mode .fg-ticket { background: var(--fg-card); }
+body.dark-mode .fg-card-title, body.dark-mode .fg-page-title { color: #6BB6E8; border-color: var(--fg-border); }
+body.dark-mode .fg-invoice { background: var(--fg-card); }
+body.dark-mode .fg-invoice-section-title, body.dark-mode .fg-invoice-table th {
+    background: #2d3238; color: #6BB6E8; border-color: var(--fg-border);
+}
+body.dark-mode .fg-invoice-section-body, body.dark-mode .fg-invoice-table td {
+    color: var(--fg-text); border-color: var(--fg-border);
+}
+body.dark-mode .fg-invoice-table .total-row td { background: #4a3f1a; color: #ffd966; }
+body.dark-mode .fg-invoice-section { border-color: var(--fg-border); }
+body.dark-mode .fg-invoice-head { border-bottom-color: #6BB6E8; }
+body.dark-mode .fg-invoice-head h2 { color: #6BB6E8; }
+body.dark-mode .fg-step-circle { background: var(--fg-card); border-color: var(--fg-border); }
+body.dark-mode .perm-item { background: #2d3238; border-color: var(--fg-border); }
+
+/* ================= هدر ================= */
+.fg-header {
+    background: linear-gradient(135deg, var(--fg-primary) 0%, var(--fg-primary-dark) 100%);
+    color: #fff;
+    height: var(--fg-header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: var(--fg-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.fg-header-right { display: flex; align-items: center; gap: 15px; }
+.fg-logo {
+    width: 42px;
+    height: 42px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--fg-primary);
+    font-size: 16px;
+}
+.fg-brand h1 { font-size: 16px; font-weight: 700; }
+.fg-brand span { font-size: 11px; opacity: 0.8; }
+.fg-header-left { display: flex; align-items: center; gap: 10px; }
+.fg-clock {
+    background: rgba(255,255,255,0.12);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.fg-user-badge {
+    background: rgba(255,255,255,0.15);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.fg-user-badge .role { font-size: 10px; opacity: 0.8; }
+.fg-header-btn {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+.fg-header-btn:hover { background: rgba(255,255,255,0.3); }
+.fg-header-btn.logout { background: rgba(220,53,69,0.3); }
+.fg-header-btn.logout:hover { background: rgba(220,53,69,0.5); }
+
+/* ================= چیدمان ================= */
+.fg-layout { display: flex; min-height: calc(100vh - var(--fg-header-h)); }
+.fg-sidebar {
+    width: var(--fg-sidebar-w);
+    background: var(--fg-sidebar);
+    color: #fff;
+    padding: 15px 0;
+    flex-shrink: 0;
+}
+.fg-menu { list-style: none; }
+.fg-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    border-right: 3px solid transparent;
+    text-decoration: none;
+}
+.fg-menu-item:hover { background: var(--fg-sidebar-hover); color: #fff; }
+.fg-menu-item.active {
+    background: var(--fg-sidebar-hover);
+    color: #fff;
+    border-right-color: var(--fg-accent);
+    font-weight: 600;
+}
+.fg-menu-item i:first-child { width: 20px; text-align: center; font-size: 15px; }
+.fg-menu-item .arrow { margin-right: auto; font-size: 11px; transition: transform 0.3s; }
+.fg-menu-item.open .arrow { transform: rotate(-90deg); }
+.fg-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(0,0,0,0.15);
+}
+.fg-submenu.open { max-height: 300px; }
+.fg-submenu .fg-menu-item { padding-right: 50px; font-size: 13px; }
+.fg-menu-item.hidden { display: none !important; }
+
+/* ================= محتوا ================= */
+.fg-content { flex: 1; padding: 20px; overflow-x: hidden; }
+.fg-page { display: none; animation: fgFade 0.3s; }
+.fg-page.active { display: block; }
+@keyframes fgFade {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fg-page-title {
+    font-size: 20px;
+    color: var(--fg-primary);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--fg-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ================= کارت آماری ================= */
+.fg-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+.fg-stat-card {
+    background: var(--fg-card);
+    border-radius: var(--fg-radius);
+    padding: 18px;
+    box-shadow: var(--fg-shadow);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-right: 4px solid var(--fg-primary-light);
+    transition: all 0.3s;
+}
+.fg-stat-card:hover { transform: translateY(-3px); box-shadow: var(--fg-shadow-lg); }
+.fg-stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #fff;
+    flex-shrink: 0;
+}
+.fg-stat-icon.blue { background: linear-gradient(135deg, #2E86C1, #1B4F72); }
+.fg-stat-icon.green { background: linear-gradient(135deg, #28A745, #1E7E34); }
+.fg-stat-icon.orange { background: linear-gradient(135deg, #FD7E14, #DC6502); }
+.fg-stat-icon.purple { background: linear-gradient(135deg, #6F42C1, #59359A); }
+.fg-stat-info { display: flex; flex-direction: column; }
+.fg-stat-label { font-size: 12px; color: var(--fg-text-muted); margin-bottom: 4px; }
+.fg-stat-value { font-size: 22px; font-weight: 700; color: var(--fg-text); }
+.fg-stat-value.small { font-size: 14px; }
+
+/* ================= کارت / فرم ================= */
+.fg-card { background: var(--fg-card); border-radius: var(--fg-radius); padding: 20px; box-shadow: var(--fg-shadow); margin-bottom: 20px; }
+.fg-card-title {
+    font-size: 15px;
+    color: var(--fg-primary);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--fg-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+.fg-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 15px; }
+.fg-form-group { display: flex; flex-direction: column; }
+.fg-form-group.full { grid-column: 1 / -1; }
+.fg-form-group label { font-size: 12px; color: var(--fg-text-muted); margin-bottom: 5px; font-weight: 500; }
+.fg-form-group label .req { color: var(--fg-danger); }
+.fg-form-group input, .fg-form-group select, .fg-form-group textarea {
+    padding: 9px 12px;
+    border: 1px solid var(--fg-border);
+    border-radius: var(--fg-radius);
+    font-size: 13px;
+    background: #fff;
+    color: var(--fg-text);
+    font-family: inherit;
+    transition: all 0.2s;
+}
+.fg-form-group input:focus, .fg-form-group select:focus, .fg-form-group textarea:focus {
+    outline: none;
+    border-color: var(--fg-primary-light);
+    box-shadow: 0 0 0 3px rgba(46,134,193,0.12);
+}
+.fg-form-group input.invalid, .fg-form-group select.invalid { border-color: var(--fg-danger) !important; background: rgba(220,53,69,0.05) !important; }
+.fg-form-group input.valid { border-color: var(--fg-success) !important; }
+.fg-error-msg { color: var(--fg-danger); font-size: 11px; margin-top: 4px; display: none; font-weight: 500; }
+.fg-error-msg.show { display: block; }
+.fg-hint-msg { color: var(--fg-text-muted); font-size: 11px; margin-top: 4px; }
+
+/* ================= دکمه ================= */
+.fg-btn {
+    padding: 9px 18px;
+    border: none;
+    border-radius: var(--fg-radius);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.2s;
+}
+.fg-btn-primary { background: var(--fg-primary); color: #fff; }
+.fg-btn-primary:hover { background: var(--fg-primary-dark); }
+.fg-btn-success { background: var(--fg-success); color: #fff; }
+.fg-btn-success:hover { background: #1E7E34; }
+.fg-btn-danger { background: var(--fg-danger); color: #fff; }
+.fg-btn-danger:hover { background: #B02A37; }
+.fg-btn-warning { background: var(--fg-warning); color: #333; }
+.fg-btn-warning:hover { background: #E0A800; }
+.fg-btn-secondary { background: #E9ECEF; color: var(--fg-text); }
+.fg-btn-secondary:hover { background: #DEE2E6; }
+.fg-btn-info { background: var(--fg-info); color: #fff; }
+.fg-btn-info:hover { background: #117A8B; }
+
+/* ================= جدول ================= */
+.fg-table-wrap { overflow-x: auto; border-radius: var(--fg-radius); }
+.fg-table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; }
+.fg-table thead th { background: var(--fg-primary); color: #fff; padding: 11px 10px; text-align: right; font-weight: 600; font-size: 12px; white-space: nowrap; }
+.fg-table tbody td { padding: 10px; border-bottom: 1px solid var(--fg-border); color: var(--fg-text); }
+.fg-table tbody tr:hover { background: #F8F9FA; }
+.fg-badge { padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; display: inline-block; }
+.fg-badge-success { background: rgba(40,167,69,0.12); color: var(--fg-success); }
+.fg-badge-danger { background: rgba(220,53,69,0.12); color: var(--fg-danger); }
+.fg-badge-warning { background: rgba(255,193,7,0.2); color: #B8860B; }
+.fg-badge-info { background: rgba(23,162,184,0.12); color: var(--fg-info); }
+.fg-badge-primary { background: rgba(27,79,114,0.12); color: var(--fg-primary); }
+.fg-badge-secondary { background: #E9ECEF; color: var(--fg-text-muted); }
+.fg-badge-purple { background: rgba(111,66,193,0.12); color: #6F42C1; }
+.fg-action-btn { background: none; border: none; cursor: pointer; padding: 4px 7px; font-size: 14px; color: var(--fg-primary-light); border-radius: 4px; transition: all 0.2s; }
+.fg-action-btn:hover { background: var(--fg-bg); color: var(--fg-primary); }
+.fg-action-btn.danger:hover { color: var(--fg-danger); }
+.fg-action-btn.info:hover { color: var(--fg-info); }
+
+/* ================= Modal ================= */
+.fg-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(3px); }
+.fg-modal.active { display: flex; }
+.fg-modal-box { background: #fff; border-radius: 10px; width: 100%; max-width: 850px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 50px rgba(0,0,0,0.3); animation: fgSlideUp 0.3s; }
+.fg-modal-box.large { max-width: 1000px; }
+.fg-modal-box.small { max-width: 500px; }
+@keyframes fgSlideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.fg-modal-head { padding: 15px 20px; background: var(--fg-primary); color: #fff; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; border-radius: 10px 10px 0 0; }
+.fg-modal-head h3 { font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.fg-modal-close { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 16px; }
+.fg-modal-body { padding: 20px; }
+.fg-modal-foot { padding: 12px 20px; border-top: 1px solid var(--fg-border); display: flex; justify-content: flex-end; gap: 10px; background: #F8F9FA; border-radius: 0 0 10px 10px; position: sticky; bottom: 0; }
+
+/* ================= فیلتر ================= */
+.fg-filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+.fg-filter-grid input, .fg-filter-grid select { padding: 8px 11px; border: 1px solid var(--fg-border); border-radius: var(--fg-radius); font-size: 13px; font-family: inherit; background: #fff; color: var(--fg-text); }
+
+/* ================= مراحل ================= */
+.fg-steps { display: flex; justify-content: space-between; align-items: center; margin: 15px 0; position: relative; }
+.fg-steps::before { content: ''; position: absolute; top: 18px; right: 5%; left: 5%; height: 2px; background: var(--fg-border); z-index: 1; }
+.fg-step { position: relative; z-index: 2; text-align: center; flex: 1; }
+.fg-step-circle { width: 36px; height: 36px; border-radius: 50%; background: #fff; border: 2px solid var(--fg-border); color: var(--fg-text-muted); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-weight: 700; font-size: 13px; transition: all 0.3s; }
+.fg-step.done .fg-step-circle { background: var(--fg-success); border-color: var(--fg-success); color: #fff; }
+.fg-step.active .fg-step-circle { background: var(--fg-primary); border-color: var(--fg-primary); color: #fff; box-shadow: 0 0 0 4px rgba(27,79,114,0.2); }
+.fg-step-label { font-size: 11px; color: var(--fg-text-muted); }
+.fg-step.active .fg-step-label { color: var(--fg-primary); font-weight: 700; }
+.fg-step.done .fg-step-label { color: var(--fg-success); font-weight: 600; }
+
+/* ================= چارت سازمانی ================= */
+.fg-org-tree { padding: 20px; overflow-x: auto; }
+.fg-org-tree ul { list-style: none; padding-right: 25px; position: relative; }
+.fg-org-tree > ul { padding-right: 0; }
+.fg-org-tree li { position: relative; padding: 8px 0; }
+.fg-org-tree li::before { content: ''; position: absolute; top: 0; right: -15px; height: 100%; border-right: 2px solid var(--fg-border); }
+.fg-org-tree > ul > li::before { display: none; }
+.fg-org-tree li::after { content: ''; position: absolute; top: 22px; right: -15px; width: 15px; border-top: 2px solid var(--fg-border); }
+.fg-org-tree > ul > li::after { display: none; }
+.fg-org-node { display: inline-flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--fg-border); border-radius: 8px; padding: 8px 14px; box-shadow: var(--fg-shadow); transition: all 0.2s; }
+.fg-org-node:hover { box-shadow: var(--fg-shadow-lg); border-color: var(--fg-primary-light); }
+.fg-org-node .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--fg-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; }
+.fg-org-node .info strong { display: block; font-size: 13px; }
+.fg-org-node .info span { font-size: 11px; color: var(--fg-text-muted); }
+
+/* ================= پیش‌فاکتور ================= */
+.fg-invoice { background: #fff; padding: 25px; border-radius: var(--fg-radius); }
+.fg-invoice-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px double var(--fg-primary); padding-bottom: 15px; margin-bottom: 15px; }
+.fg-invoice-head h2 { color: var(--fg-primary); font-size: 20px; }
+.fg-invoice-meta { font-size: 12px; color: var(--fg-text-muted); text-align: left; }
+.fg-invoice-section { border: 1px solid var(--fg-border); border-radius: 6px; margin-bottom: 12px; overflow: hidden; }
+.fg-invoice-section-title { background: #E9ECEF; padding: 6px 12px; font-weight: 700; font-size: 12px; color: var(--fg-primary); border-bottom: 1px solid var(--fg-border); }
+.fg-invoice-section-body { padding: 10px 12px; font-size: 12px; line-height: 2; }
+.fg-invoice-section-body .row { display: grid; grid-template-columns: 110px 1fr 110px 1fr; gap: 8px; }
+.fg-invoice-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.fg-invoice-table th { background: #E9ECEF; padding: 8px 6px; border: 1px solid var(--fg-border); font-size: 11px; color: var(--fg-primary); }
+.fg-invoice-table td { padding: 8px 6px; border: 1px solid var(--fg-border); text-align: center; }
+.fg-invoice-table .total-row td { background: #FFF3CD; font-weight: 700; }
+
+/* ================= تیکت ================= */
+.fg-ticket { border: 1px solid var(--fg-border); border-radius: 8px; padding: 12px; margin-bottom: 10px; border-right: 4px solid var(--fg-warning); background: #fff; }
+.fg-ticket-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.fg-ticket-head .title { font-weight: 700; font-size: 13px; color: var(--fg-primary); }
+.fg-ticket-head .date { font-size: 11px; color: var(--fg-text-muted); }
+.fg-ticket-body { font-size: 12px; color: var(--fg-text); line-height: 1.7; }
+
+.fg-empty { text-align: center; padding: 30px; color: var(--fg-text-muted); font-style: italic; }
+.fg-new-badge { background: var(--fg-success); color: #fff; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-right: 8px; font-weight: 600; }
+
+/* ================= صفحه لاگین ================= */
+.fg-login-overlay { position: fixed; inset: 0; background: linear-gradient(135deg, #1B4F72 0%, #133B57 100%); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.fg-login-overlay.hidden { display: none; }
+.fg-login-box { background: #fff; border-radius: 16px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); animation: fgSlideUp 0.4s; }
+.fg-login-logo { width: 70px; height: 70px; margin: 0 auto 20px; background: linear-gradient(135deg, #1B4F72, #2E86C1); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 28px; font-weight: 700; }
+.fg-login-box h2 { text-align: center; color: #1B4F72; margin-bottom: 5px; font-size: 22px; }
+.fg-login-box p { text-align: center; color: #6C757D; margin-bottom: 30px; font-size: 13px; }
+.fg-login-box .fg-form-group { margin-bottom: 16px; }
+.fg-login-box input { padding: 12px 15px !important; font-size: 14px !important; text-align: right; }
+.fg-login-error { background: rgba(220,53,69,0.1); color: #DC3545; padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 15px; text-align: center; display: none; }
+.fg-login-error.show { display: block; }
+.fg-login-box button { width: 100%; padding: 12px; font-size: 14px; background: linear-gradient(135deg, #1B4F72, #2E86C1); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; font-weight: 600; transition: all 0.2s; }
+.fg-login-box button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(27,79,114,0.3); }
+.fg-login-hint { margin-top: 20px; padding: 12px; background: #F8F9FA; border-radius: 8px; font-size: 11px; color: #6C757D; text-align: center; line-height: 1.8; }
+.fg-login-hint strong { color: #1B4F72; }
+
+/* ================= Permissions ================= */
+.perm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 10px; }
+.perm-item { background: #F8F9FA; border: 1px solid var(--fg-border); border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; transition: all 0.2s; cursor: pointer; }
+.perm-item:hover { border-color: var(--fg-primary-light); background: #EEF4FA; }
+.perm-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--fg-primary); }
+.perm-item label { cursor: pointer; font-size: 13px; flex: 1; display: flex; align-items: center; gap: 8px; }
+.perm-item label i { color: var(--fg-primary-light); width: 16px; text-align: center; }
+.perm-item.sensitive { border-right: 3px solid var(--fg-warning); }
+.perm-item.sensitive label i { color: var(--fg-warning); }
+.perm-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.role-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: var(--fg-bg); border: 1px solid var(--fg-border); border-radius: 20px; font-size: 12px; margin: 3px; }
+.role-chip .remove { cursor: pointer; color: var(--fg-danger); font-size: 14px; line-height: 1; }
+.role-chip .remove:hover { font-weight: 700; }
+
+/* ================= واکنش‌گرا ================= */
+@media (max-width: 768px) {
+    .fg-layout { flex-direction: column; }
+    .fg-sidebar { width: 100%; padding: 8px 0; }
+    .fg-menu { display: flex; overflow-x: auto; }
+    .fg-menu-item { white-space: nowrap; border-right: none; border-bottom: 3px solid transparent; }
+    .fg-menu-item.active { border-right: none; border-bottom-color: var(--fg-accent); }
+    .fg-submenu { display: none; }
+    .fg-clock, .fg-user-badge { display: none; }
+    .fg-invoice-section-body .row { grid-template-columns: 100px 1fr; }
+    .fg-login-box { padding: 25px; }
+}
+
+@media print {
+    .fg-header, .fg-sidebar, .fg-btn, .no-print { display: none !important; }
+    .fg-content { padding: 0; }
+    .fg-invoice { box-shadow: none; }
+    body { background: #fff; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= صفحه لاگین ================= -->
+<div class="fg-login-overlay hidden" id="loginOverlay">
+    <div class="fg-login-box">
+        <div class="fg-login-logo">دنا</div>
+        <h2>شیمی فرایند دنا</h2>
+        <p>سامانه اتوماسیون فروش و مشتریان</p>
+        <div class="fg-login-error" id="loginError"></div>
+        <form id="loginForm">
+            <div class="fg-form-group">
+                <label>نام کاربری</label>
+                <input type="text" id="loginUser" placeholder="نام کاربری" autocomplete="username" required>
+            </div>
+            <div class="fg-form-group">
+                <label>رمز عبور</label>
+                <input type="password" id="loginPass" placeholder="رمز عبور" autocomplete="current-password" required>
+            </div>
+            <button type="submit"><i class="fas fa-sign-in-alt"></i> ورود به سامانه</button>
+        </form>
+        <div class="fg-login-hint">
+            <strong>کاربران پیش‌فرض:</strong><br>
+            مدیر سیستم: <strong>admin / admin</strong><br>
+            مدیر بازرگانی: <strong>manager / 1234</strong><br>
+            کارشناس فروش: <strong>expert / 1234</strong><br>
+            واحد تولید: <strong>production / 1234</strong>
+        </div>
+    </div>
+</div>
+
+<!-- ================= هدر ================= -->
+<header class="fg-header">
+    <div class="fg-header-right">
+        <div class="fg-logo">دنا</div>
+        <div class="fg-brand">
+            <h1>شیمی فرایند دنا</h1>
+            <span>سامانه اتوماسیون فروش و مشتریان</span>
+        </div>
+    </div>
+    <div class="fg-header-left">
+        <div class="fg-user-badge">
+            <i class="fas fa-user-circle"></i>
+            <span id="currentUserName">-</span>
+            <span class="role" id="currentUserRole">-</span>
+        </div>
+        <div class="fg-clock">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="clockDate">...</span>
+            <span id="clockTime">--:--</span>
+        </div>
+        <button class="fg-header-btn" onclick="toggleTheme()" title="تغییر تم" id="themeBtn">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <button class="fg-header-btn" onclick="window.print()" title="چاپ"><i class="fas fa-print"></i></button>
+        <button class="fg-header-btn" onclick="exportExcel()" title="خروجی CSV"><i class="fas fa-file-excel"></i></button>
+        <button class="fg-header-btn logout" onclick="logout()" title="خروج"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+</header>
+
+<!-- ================= چیدمان ================= -->
+<div class="fg-layout">
+    <aside class="fg-sidebar">
+        <ul class="fg-menu">
+            <li data-perm="dashboard"><a class="fg-menu-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i><span>داشبورد</span></a></li>
+            <li data-perm="requests"><a class="fg-menu-item" data-page="requests"><i class="fas fa-clipboard-list"></i><span>درخواست مشتریان</span></a></li>
+            <li data-perm="customers"><a class="fg-menu-item" data-page="customers"><i class="fas fa-users"></i><span>مشتریان</span></a></li>
+            <li data-perm="pricing">
+                <a class="fg-menu-item" id="menuPricing"><i class="fas fa-calculator"></i><span>تعیین قیمت</span><i class="fas fa-chevron-left arrow"></i></a>
+                <ul class="fg-submenu" id="subPricing">
+                    <li data-perm="pricing_solvent"><a class="fg-menu-item" data-page="pricing-solvent"><i class="fas fa-flask"></i><span>حلال و شیمیایی</span></a></li>
+                    <li data-perm="pricing_wax"><a class="fg-menu-item" data-page="pricing-wax"><i class="fas fa-cube"></i><span>واکس</span></a></li>
+                </ul>
+            </li>
+            <li data-perm="preinvoice"><a class="fg-menu-item" data-page="preinvoice"><i class="fas fa-file-invoice"></i><span>پیش‌فاکتور</span></a></li>
+            <li data-perm="approvals"><a class="fg-menu-item" data-page="approvals"><i class="fas fa-check-circle"></i><span>تاییدات</span></a></li>
+            <li data-perm="tickets"><a class="fg-menu-item" data-page="tickets"><i class="fas fa-ticket-alt"></i><span>تیکت‌ها</span></a></li>
+            <li data-perm="orgchart"><a class="fg-menu-item" data-page="orgchart"><i class="fas fa-sitemap"></i><span>چارت سازمانی</span></a></li>
+            <li data-perm="users"><a class="fg-menu-item" data-page="users"><i class="fas fa-user-cog"></i><span>کاربران و نقش‌ها</span></a></li>
+        </ul>
+    </aside>
+
+    <main class="fg-content">
+
+        <!-- ============ داشبورد ============ -->
+        <section id="page-dashboard" class="fg-page active">
+            <h2 class="fg-page-title"><i class="fas fa-tachometer-alt"></i> داشبورد اصلی</h2>
+            <div class="fg-stats">
+                <div class="fg-stat-card">
+                    <div class="fg-stat-icon blue"><i class="fas fa-users"></i></div>
+                    <div class="fg-stat-info">
+                        <span class="fg-stat-label">کل مشتریان</span>
+                        <span class="fg-stat-value" id="statCustomers">0</span>
+                    </div>
+                </div>
+                <div class="fg-stat-card">
+                    <div class="fg-stat-icon orange"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="fg-stat-info">
+                        <span class="fg-stat-label">درخواست‌های باز</span>
+                        <span class="fg-stat-value" id="statRequests">0</span>
+                    </div>
+                </div>
+                <div class="fg-stat-card">
+                    <div class="fg-stat-icon green"><i class="fas fa-file-invoice"></i></div>
+                    <div class="fg-stat-info">
+                        <span class="fg-stat-label">پیش‌فاکتور صادر شده</span>
+                        <span class="fg-stat-value" id="statPreInvoices">0</span>
+                    </div>
+                </div>
+                <div class="fg-stat-card">
+                    <div class="fg-stat-icon purple"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="fg-stat-info">
+                        <span class="fg-stat-label">مجموع فروش</span>
+                        <span class="fg-stat-value small" id="statSales">0 ریال</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-bell"></i> آخرین فعالیت‌ها</div>
+                <div id="recentActivity"></div>
+            </div>
+        </section>
+
+        <!-- ============ درخواست مشتریان ============ -->
+        <section id="page-requests" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-clipboard-list"></i> مدیریت درخواست مشتریان</h2>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-route"></i> مراحل فرایند فروش</div>
+                <div class="fg-steps">
+                    <div class="fg-step done"><div class="fg-step-circle">1</div><div class="fg-step-label">درخواست</div></div>
+                    <div class="fg-step active"><div class="fg-step-circle">2</div><div class="fg-step-label">بررسی</div></div>
+                    <div class="fg-step"><div class="fg-step-circle">3</div><div class="fg-step-label">تعیین قیمت</div></div>
+                    <div class="fg-step"><div class="fg-step-circle">4</div><div class="fg-step-label">پیش‌فاکتور</div></div>
+                    <div class="fg-step"><div class="fg-step-circle">5</div><div class="fg-step-label">تایید</div></div>
+                    <div class="fg-step"><div class="fg-step-circle">6</div><div class="fg-step-label">واریز وجه</div></div>
+                    <div class="fg-step"><div class="fg-step-circle">7</div><div class="fg-step-label">تولید</div></div>
+                    <div class="fg-step"><div class="fg-step-circle">8</div><div class="fg-step-label">ارسال</div></div>
+                </div>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-plus-circle"></i> ثبت درخواست جدید</div>
+                <form id="requestForm">
+                    <div class="fg-form-grid">
+                        <div class="fg-form-group">
+                            <label>مشتری <span class="req">*</span></label>
+                            <select name="customerId" id="req_customer" required></select>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>نوع محصول <span class="req">*</span></label>
+                            <select name="productType" id="req_product" required></select>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>مقدار (کیلوگرم) <span class="req">*</span></label>
+                            <input type="number" name="quantity" min="1" required>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>تاریخ درخواست <span class="req">*</span></label>
+                            <select name="date" id="req_date" required></select>
+                        </div>
+                        <div class="fg-form-group full">
+                            <label>توضیحات</label>
+                            <textarea name="notes" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="fg-btn fg-btn-primary"><i class="fas fa-save"></i> ثبت درخواست</button>
+                </form>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-filter"></i> فیلتر</div>
+                <div class="fg-filter-grid">
+                    <input type="text" id="filterCustomer" placeholder="نام مشتری..." oninput="renderRequests()">
+                    <select id="filterProduct" onchange="renderRequests()">
+                        <option value="">همه محصولات</option>
+                    </select>
+                    <select id="filterStatus" onchange="renderRequests()">
+                        <option value="">همه وضعیت‌ها</option>
+                        <option value="new">جدید</option>
+                        <option value="review">در بررسی</option>
+                        <option value="priced">قیمت‌گذاری شده</option>
+                        <option value="invoiced">پیش‌فاکتور</option>
+                        <option value="approved">تایید شده</option>
+                        <option value="paid">واریز شده</option>
+                        <option value="produced">تولید شده</option>
+                        <option value="sent">ارسال شده</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-list"></i> لیست درخواست‌ها</div>
+                <div class="fg-table-wrap">
+                    <table class="fg-table">
+                        <thead>
+                            <tr>
+                                <th>#</th><th>مشتری</th><th>محصول</th><th>مقدار</th>
+                                <th>تاریخ</th><th>وضعیت</th><th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="requestsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ مشتریان ============ -->
+        <section id="page-customers" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-users"></i> مدیریت مشتریان</h2>
+
+            <div class="fg-card" style="border-right:4px solid var(--fg-success);">
+                <div class="fg-card-title" style="color:var(--fg-success);">
+                    <i class="fas fa-user-plus"></i>
+                    <span id="customerFormTitle">افزودن مشتری جدید</span>
+                    <span class="fg-new-badge">جدید</span>
+                </div>
+                <form id="customerForm">
+                    <input type="hidden" id="editCustomerId">
+                    <div class="fg-form-grid">
+                        <div class="fg-form-group">
+                            <label>نام شرکت <span class="req">*</span></label>
+                            <input type="text" name="companyName" required>
+                            <span class="fg-error-msg" data-for="companyName">الزامی</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>شماره اقتصادی (۱۲ رقم) <span class="req">*</span></label>
+                            <input type="text" name="economicCode" maxlength="12" required>
+                            <span class="fg-error-msg" data-for="economicCode">دقیقاً ۱۲ رقم</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>شناسه ملی (۱۱ رقم) <span class="req">*</span></label>
+                            <input type="text" name="nationalId" maxlength="11" required>
+                            <span class="fg-error-msg" data-for="nationalId">دقیقاً ۱۱ رقم</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>شماره ثبت (۳-۱۰ رقم) <span class="req">*</span></label>
+                            <input type="text" name="regNumber" maxlength="10" required>
+                            <span class="fg-error-msg" data-for="regNumber">بین ۳ تا ۱۰ رقم</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>کد پستی (۱۰ رقم) <span class="req">*</span></label>
+                            <input type="text" name="postalCode" maxlength="10" required>
+                            <span class="fg-error-msg" data-for="postalCode">دقیقاً ۱۰ رقم</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>تلفن / فکس</label>
+                            <input type="tel" name="phone" maxlength="15">
+                            <span class="fg-error-msg" data-for="phone">۸ تا ۱۱ رقم</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>موبایل (۱۱ رقم) <span class="req">*</span></label>
+                            <input type="tel" name="mobile" maxlength="11" placeholder="09xxxxxxxxx" required>
+                            <span class="fg-error-msg" data-for="mobile">۱۱ رقم با ۰۹</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>نوع فروش <span class="req">*</span></label>
+                            <select name="saleType" required>
+                                <option value="">انتخاب...</option>
+                                <option value="formal">رسمی</option>
+                                <option value="informal">غیررسمی</option>
+                            </select>
+                            <span class="fg-error-msg" data-for="saleType">الزامی</span>
+                        </div>
+                        <div class="fg-form-group full">
+                            <label>آدرس</label>
+                            <textarea name="address" rows="2"></textarea>
+                        </div>
+                        <div class="fg-form-group full">
+                            <label>فرد رابط</label>
+                            <input type="text" name="contactPerson">
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button type="submit" class="fg-btn fg-btn-success">
+                            <i class="fas fa-user-plus"></i>
+                            <span id="submitCustBtnText">افزودن</span>
+                        </button>
+                        <button type="button" class="fg-btn fg-btn-secondary" id="cancelEditCust" onclick="cancelCustomerEdit()" style="display:none;">
+                            <i class="fas fa-times"></i> لغو
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-list"></i> لیست مشتریان</div>
+                <div class="fg-filter-grid" style="margin-bottom:12px;">
+                    <input type="text" id="searchCustomer" placeholder="جستجو..." oninput="renderCustomers()">
+                    <select id="searchSaleType" onchange="renderCustomers()">
+                        <option value="">همه</option>
+                        <option value="formal">رسمی</option>
+                        <option value="informal">غیررسمی</option>
+                    </select>
+                </div>
+                <div class="fg-table-wrap">
+                    <table class="fg-table">
+                        <thead>
+                            <tr>
+                                <th>#</th><th>نام شرکت</th><th>موبایل</th><th>کد پستی</th>
+                                <th>نوع فروش</th><th>رابط</th><th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ تعیین قیمت حلال ============ -->
+        <section id="page-pricing-solvent" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-flask"></i> تعیین قیمت - حلال، متیلن، D.M.F، D.O.P</h2>
+
+            <div class="fg-card" style="background:#E7F3FF; border-right:4px solid var(--fg-primary-light);">
+                <div style="display:flex; gap:12px; align-items:flex-start;">
+                    <i class="fas fa-info-circle" style="color:var(--fg-primary); font-size:20px; margin-top:3px;"></i>
+                    <div>
+                        <strong style="color:var(--fg-primary);">روش تعیین قیمت:</strong>
+                        <p style="font-size:13px; color:var(--fg-text-muted); margin-top:5px; line-height:1.8;">
+                            ابتدا از بازار قیمت خرید گرفته می‌شود، سپس درصد سود به آن اضافه شده و قیمت نهایی تعیین می‌گردد.
+                            این قیمت پس از ثبت، جهت <strong>تایید</strong> به مدیر بازاریابی و فروش ارجاع داده می‌شود.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- مدیریت محصولات -->
+            <div class="fg-card" style="border-right:4px solid var(--fg-warning);">
+                <div class="fg-card-title" style="color:var(--fg-warning);">
+                    <i class="fas fa-boxes"></i>
+                    <span>مدیریت محصولات</span>
+                    <button class="fg-btn fg-btn-warning" style="margin-right:auto; padding:6px 14px; font-size:12px;" onclick="openProductModal()">
+                        <i class="fas fa-plus"></i> افزودن محصول جدید
+                    </button>
+                </div>
+                <div class="fg-table-wrap">
+                    <table class="fg-table">
+                        <thead>
+                            <tr><th>#</th><th>نام محصول</th><th>دسته‌بندی</th><th>عملیات</th></tr>
+                        </thead>
+                        <tbody id="productsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-calculator"></i> ثبت قیمت جدید</div>
+                <form id="solventPriceForm">
+                    <div class="fg-form-grid">
+                        <div class="fg-form-group">
+                            <label>نوع محصول *</label>
+                            <select name="product" id="solventProductSelect" required></select>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>تامین‌کننده *</label>
+                            <input type="text" name="supplier" required>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>تاریخ *</label>
+                            <input type="text" name="date" id="solventDate" readonly>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>قیمت خرید (ریال) *</label>
+                            <input type="number" name="buyPrice" id="solventBuy" required oninput="calcSolvent()">
+                        </div>
+                        <div class="fg-form-group">
+                            <label>درصد سود (%) *</label>
+                            <input type="number" name="profit" id="solventProfit" value="10" required oninput="calcSolvent()">
+                        </div>
+                        <div class="fg-form-group">
+                            <label>مبلغ سود</label>
+                            <input type="text" id="solventProfitAmount" readonly style="background:#F0F0F0;">
+                        </div>
+                        <div class="fg-form-group">
+                            <label>قیمت نهایی (ریال)</label>
+                            <input type="text" id="solventFinal" readonly style="background:#FFF3CD; font-weight:700;">
+                        </div>
+                        <div class="fg-form-group">
+                            <label>نوع خرید *</label>
+                            <select name="buyType" required>
+                                <option value="رسمی">رسمی</option>
+                                <option value="غیررسمی">غیررسمی</option>
+                            </select>
+                        </div>
+                        <div class="fg-form-group full">
+                            <label>توضیحات</label>
+                            <textarea name="notes" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="fg-btn fg-btn-primary"><i class="fas fa-save"></i> ثبت و ارجاع</button>
+                </form>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-history"></i> تاریخچه قیمت‌ها</div>
+                <div class="fg-filter-grid" style="margin-bottom:12px;">
+                    <input type="text" id="filterSolventProduct" placeholder="فیلتر محصول..." oninput="renderSolventPrices()">
+                    <select id="filterSolventType" onchange="renderSolventPrices()">
+                        <option value="">همه انواع خرید</option>
+                        <option value="رسمی">رسمی</option>
+                        <option value="غیررسمی">غیررسمی</option>
+                    </select>
+                    <select id="filterSolventStatus" onchange="renderSolventPrices()">
+                        <option value="">همه وضعیت‌ها</option>
+                        <option value="pending">در انتظار</option>
+                        <option value="approved">تایید شده</option>
+                        <option value="rejected">رد شده</option>
+                    </select>
+                </div>
+                <div class="fg-table-wrap">
+                    <table class="fg-table">
+                        <thead>
+                            <tr>
+                                <th>#</th><th>محصول</th><th>تامین‌کننده</th><th>تاریخ</th>
+                                <th>قیمت خرید</th><th>سود</th><th>قیمت نهایی</th>
+                                <th>نوع</th><th>وضعیت</th><th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="solventPriceTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ تعیین قیمت واکس ============ -->
+        <section id="page-pricing-wax" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-cube"></i> تعیین قیمت - واکس</h2>
+
+            <div class="fg-card" style="background:#FFF8E1; border-right:4px solid var(--fg-warning);">
+                <div style="display:flex; gap:12px; align-items:flex-start;">
+                    <i class="fas fa-info-circle" style="color:#B8860B; font-size:20px; margin-top:3px;"></i>
+                    <div>
+                        <strong style="color:#B8860B;">روش تعیین قیمت واکس:</strong>
+                        <p style="font-size:13px; color:var(--fg-text-muted); margin-top:5px; line-height:1.8;">
+                            جدول قیمت واکس ابتدای هر سال به‌روزرسانی می‌شود. بازه قیمتی مشخص می‌گردد،
+                            سپس بر اساس <strong>سابقه خرید مشتری</strong> قیمت اولیه تعیین می‌شود.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title">
+                    <i class="fas fa-table"></i> جدول قیمت واکس سالانه
+                    <span class="fg-badge fg-badge-info" id="waxCurrentYear" style="margin-right:auto;">سال 1405</span>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px; flex-wrap:wrap;">
+                    <label>سال:</label>
+                    <input type="text" id="waxYearInput" value="1405" style="padding:7px 12px; border:1px solid var(--fg-border); border-radius:6px; width:100px;">
+                    <button class="fg-btn fg-btn-info" onclick="updateWaxYear()"><i class="fas fa-sync"></i> به‌روزرسانی</button>
+                    <button class="fg-btn fg-btn-success" onclick="addWaxRow()"><i class="fas fa-plus"></i> افزودن ردیف</button>
+                </div>
+                <div class="fg-table-wrap">
+                    <table class="fg-table">
+                        <thead>
+                            <tr><th>#</th><th>نوع واکس</th><th>حداقل</th><th>حداکثر</th><th>قیمت پایه</th><th>سال</th><th>عملیات</th></tr>
+                        </thead>
+                        <tbody id="waxTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-user-check"></i> تعیین قیمت بر اساس سابقه خرید</div>
+                <form id="waxPriceForm">
+                    <div class="fg-form-grid">
+                        <div class="fg-form-group">
+                            <label>مشتری *</label>
+                            <select name="customerId" id="waxCustomer" required onchange="showCustomerWaxHistory()"></select>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>نوع واکس *</label>
+                            <select name="waxType" id="waxTypeSelect" required onchange="fillWaxBasePrice()"></select>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>بازه قیمتی</label>
+                            <input type="text" id="waxRange" readonly style="background:#F0F0F0;">
+                        </div>
+                        <div class="fg-form-group">
+                            <label>قیمت پایه</label>
+                            <input type="text" id="waxBasePrice" readonly style="background:#F0F0F0;">
+                        </div>
+                        <div class="fg-form-group">
+                            <label>قیمت نهایی پیشنهادی (ریال) *</label>
+                            <input type="number" name="finalPrice" id="waxFinalPrice" required>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>درصد اختلاف</label>
+                            <input type="text" id="waxDiscount" readonly style="background:#FFF3CD;">
+                        </div>
+                    </div>
+                    <div id="customerWaxHistoryBox" style="margin-top:15px; padding:12px; background:#F8F9FA; border-radius:8px; display:none;">
+                        <strong>سابقه خرید:</strong>
+                        <div id="customerWaxHistoryList" style="margin-top:8px; font-size:12px;"></div>
+                    </div>
+                    <div style="margin-top:12px;">
+                        <button type="submit" class="fg-btn fg-btn-success"><i class="fas fa-check"></i> ثبت قیمت</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-list"></i> قیمت‌های واکس ثبت شده</div>
+                <div class="fg-table-wrap">
+                    <table class="fg-table">
+                        <thead>
+                            <tr><th>#</th><th>مشتری</th><th>نوع واکس</th><th>تاریخ</th><th>قیمت پایه</th><th>قیمت نهایی</th><th>وضعیت</th></tr>
+                        </thead>
+                        <tbody id="waxPriceHistoryTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ پیش‌فاکتور ============ -->
+        <section id="page-preinvoice" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-file-invoice"></i> صدور پیش‌فاکتور</h2>
+
+            <div class="fg-card" style="border-right:4px solid var(--fg-primary);">
+                <div class="fg-card-title" style="color:var(--fg-primary);">
+                    <i class="fas fa-file-plus"></i>
+                    <span>صدور پیش‌فاکتور جدید</span>
+                    <span class="fg-new-badge">جدید</span>
+                </div>
+                <form id="preinvoiceForm">
+                    <div class="fg-form-grid">
+                        <div class="fg-form-group">
+                            <label>مشتری <span class="req">*</span></label>
+                            <select name="customerId" id="pi_customer" required></select>
+                            <span class="fg-error-msg" data-for="customerId">الزامی</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>شماره پیش‌فاکتور</label>
+                            <input type="text" name="invoiceNo" id="pi_invoiceNo" readonly>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>تاریخ</label>
+                            <input type="text" name="date" id="pi_date" readonly>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>محصول <span class="req">*</span></label>
+                            <select name="product" id="pi_product" required></select>
+                            <span class="fg-error-msg" data-for="product">الزامی</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>مقدار (kg) <span class="req">*</span></label>
+                            <input type="number" name="quantity" id="pi_qty" min="1" required oninput="calcInvoiceRow()">
+                            <span class="fg-error-msg" data-for="quantity">باید > 0</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>قیمت واحد (ریال) <span class="req">*</span></label>
+                            <input type="number" name="unitPrice" id="pi_price" min="1" required oninput="calcInvoiceRow()">
+                            <span class="fg-error-msg" data-for="unitPrice">باید > 0</span>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>جمع کل</label>
+                            <input type="text" id="pi_total" readonly style="background:#FFF3CD; font-weight:700;">
+                        </div>
+                    </div>
+                    <button type="submit" class="fg-btn fg-btn-primary">
+                        <i class="fas fa-file-invoice"></i> صدور پیش‌فاکتور
+                    </button>
+                </form>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-list"></i> لیست پیش‌فاکتورها</div>
+                <div class="fg-table-wrap">
+                    <table class="fg-table">
+                        <thead>
+                            <tr>
+                                <th>#</th><th>شماره</th><th>تاریخ</th><th>مشتری</th>
+                                <th>محصول</th><th>مقدار</th><th>جمع کل</th><th>وضعیت</th><th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="preinvoiceTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ تاییدات ============ -->
+        <section id="page-approvals" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-check-circle"></i> تاییدات مدیر بازرگانی</h2>
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-clock"></i> در انتظار تایید</div>
+                <div id="approvalList"></div>
+            </div>
+        </section>
+
+        <!-- ============ تیکت‌ها ============ -->
+        <section id="page-tickets" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-ticket-alt"></i> تیکت‌های اصلاحات</h2>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-plus"></i> ثبت تیکت جدید</div>
+                <form id="ticketForm">
+                    <div class="fg-form-grid">
+                        <div class="fg-form-group">
+                            <label>عنوان *</label>
+                            <input type="text" name="title" required>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>پیش‌فاکتور</label>
+                            <select name="preinvoiceNo" id="ticketPI">
+                                <option value="">هیچ‌کدام</option>
+                            </select>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>گیرنده</label>
+                            <select name="assignTo">
+                                <option value="کارشناس فروش">کارشناس فروش</option>
+                                <option value="مدیر بازرگانی">مدیر بازرگانی</option>
+                                <option value="واحد تولید">واحد تولید</option>
+                            </select>
+                        </div>
+                        <div class="fg-form-group full">
+                            <label>شرح *</label>
+                            <textarea name="body" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="fg-btn fg-btn-warning"><i class="fas fa-paper-plane"></i> ارسال</button>
+                </form>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-inbox"></i> تیکت‌های ثبت شده</div>
+                <div id="ticketList"></div>
+            </div>
+        </section>
+
+        <!-- ============ چارت سازمانی ============ -->
+        <section id="page-orgchart" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-sitemap"></i> چارت سازمانی</h2>
+            <div class="fg-card">
+                <div class="fg-org-tree" id="orgTree"></div>
+            </div>
+        </section>
+
+        <!-- ============ کاربران و نقش‌ها ============ -->
+        <section id="page-users" class="fg-page">
+            <h2 class="fg-page-title"><i class="fas fa-user-cog"></i> مدیریت کاربران و نقش‌ها</h2>
+
+            <div class="fg-card" style="border-right:4px solid var(--fg-primary);">
+                <div class="fg-card-title">
+                    <i class="fas fa-user-tag"></i>
+                    <span>نقش‌های سازمانی</span>
+                    <button class="fg-btn fg-btn-primary" style="margin-right:auto; padding:6px 14px; font-size:12px;" onclick="openRoleModal()">
+                        <i class="fas fa-plus"></i> نقش جدید
+                    </button>
+                </div>
+                <div id="rolesList" style="display:flex; flex-wrap:wrap; gap:8px; min-height:40px;"></div>
+            </div>
+
+            <div class="fg-card" style="border-right:4px solid var(--fg-success);">
+                <div class="fg-card-title" style="color:var(--fg-success);">
+                    <i class="fas fa-user-plus"></i>
+                    <span id="userFormTitle">افزودن کاربر جدید</span>
+                    <span class="fg-new-badge">جدید</span>
+                </div>
+                <form id="userForm">
+                    <input type="hidden" id="editUserId">
+                    <div class="fg-form-grid">
+                        <div class="fg-form-group">
+                            <label>نام و نام خانوادگی *</label>
+                            <input type="text" name="fullName" required>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>نام کاربری *</label>
+                            <input type="text" name="username" required>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>رمز عبور *</label>
+                            <input type="text" name="password" required>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>نقش *</label>
+                            <select name="roleId" id="userRoleSelect" required onchange="onUserRoleChange()"></select>
+                        </div>
+                        <div class="fg-form-group">
+                            <label>وضعیت</label>
+                            <select name="status">
+                                <option value="active">فعال</option>
+                                <option value="inactive">غیرفعال</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:15px; padding:15px; background:#F8F9FA; border-radius:8px; border-right:3px solid var(--fg-primary-light);">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
+                            <strong style="color:var(--fg-primary); font-size:13px;">
+                                <i class="fas fa-shield-alt"></i> دسترسی‌های اختصاصی این کاربر
+                            </strong>
+                            <span class="fg-hint-msg" style="margin:0;">روی دسترسی‌های نقش اعمال می‌شود</span>
+                        </div>
+                        <div class="perm-actions">
+                            <button type="button" class="fg-btn fg-btn-secondary" style="padding:5px 12px; font-size:11px;" onclick="selectAllPerms(true)">
+                                <i class="fas fa-check-double"></i> همه
+                            </button>
+                            <button type="button" class="fg-btn fg-btn-secondary" style="padding:5px 12px; font-size:11px;" onclick="selectAllPerms(false)">
+                                <i class="fas fa-times"></i> هیچ‌کدام
+                            </button>
+                            <button type="button" class="fg-btn fg-btn-info" style="padding:5px 12px; font-size:11px;" onclick="inheritRolePerms()">
+                                <i class="fas fa-sync"></i> بازگشت به نقش
+                            </button>
+                        </div>
+                        <div class="perm-grid" id="userPermGrid"></div>
+                    </div>
+
+                    <div style="display:flex; gap:8px; margin-top:15px;">
+                        <button type="submit" class="fg-btn fg-btn-success">
+                            <i class="fas fa-user-plus"></i>
+                            <span id="submitUserBtnText">افزودن کاربر</span>
+                        </button>
+                        <button type="button" class="fg-btn fg-btn-secondary" id="cancelEditUser" onclick="cancelUserEdit()" style="display:none;">
+                            <i class="fas fa-times"></i> لغو
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="fg-card">
+                <div class="fg-card-title"><i class="fas fa-list"></i> لیست کاربران</div>
+                <div class="fg-table-wrap">
+                    <table class="fg-table">
+                        <thead>
+                            <tr>
+                                <th>#</th><th>نام</th><th>نام کاربری</th><th>نقش</th>
+                                <th>دسترسی‌ها</th><th>وضعیت</th><th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- ================= Modal نقش ================= -->
+<div id="modalRole" class="fg-modal">
+    <div class="fg-modal-box large">
+        <div class="fg-modal-head">
+            <h3><i class="fas fa-user-tag"></i> <span id="roleModalTitle">نقش جدید</span></h3>
+            <button class="fg-modal-close" onclick="closeModal('modalRole')">×</button>
+        </div>
+        <div class="fg-modal-body">
+            <input type="hidden" id="editRoleId">
+            <div class="fg-form-grid">
+                <div class="fg-form-group">
+                    <label>نام نقش *</label>
+                    <input type="text" id="roleName">
+                </div>
+                <div class="fg-form-group">
+                    <label>توضیحات</label>
+                    <input type="text" id="roleDesc">
+                </div>
+            </div>
+            <div style="margin-top:15px;">
+                <strong style="color:var(--fg-primary); font-size:13px; display:block; margin-bottom:10px;">
+                    <i class="fas fa-shield-alt"></i> دسترسی‌ها
+                </strong>
+                <div class="perm-actions">
+                    <button type="button" class="fg-btn fg-btn-secondary" style="padding:5px 12px; font-size:11px;" onclick="selectAllRolePerms(true)">همه</button>
+                    <button type="button" class="fg-btn fg-btn-secondary" style="padding:5px 12px; font-size:11px;" onclick="selectAllRolePerms(false)">هیچ‌کدام</button>
+                </div>
+                <div class="perm-grid" id="rolePermGrid"></div>
+            </div>
+        </div>
+        <div class="fg-modal-foot">
+            <button class="fg-btn fg-btn-secondary" onclick="closeModal('modalRole')">انصراف</button>
+            <button class="fg-btn fg-btn-primary" onclick="saveRole()"><i class="fas fa-save"></i> ذخیره</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= Modal محصول ================= -->
+<div id="modalProduct" class="fg-modal">
+    <div class="fg-modal-box small">
+        <div class="fg-modal-head">
+            <h3><i class="fas fa-box"></i> <span id="productModalTitle">محصول جدید</span></h3>
+            <button class="fg-modal-close" onclick="closeModal('modalProduct')">×</button>
+        </div>
+        <div class="fg-modal-body">
+            <input type="hidden" id="editProductId">
+            <div class="fg-form-group" style="margin-bottom:15px;">
+                <label>نام محصول <span class="req">*</span></label>
+                <input type="text" id="productName" placeholder="مثال: استون، تولوئن">
+            </div>
+            <div class="fg-form-group">
+                <label>دسته‌بندی <span class="req">*</span></label>
+                <select id="productCategory">
+                    <option value="solvent">حلال / شیمیایی</option>
+                    <option value="wax">واکس</option>
+                    <option value="other">سایر</option>
+                </select>
+            </div>
+        </div>
+        <div class="fg-modal-foot">
+            <button class="fg-btn fg-btn-secondary" onclick="closeModal('modalProduct')">انصراف</button>
+            <button class="fg-btn fg-btn-primary" onclick="saveProduct()"><i class="fas fa-save"></i> ذخیره</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= Modal پیش‌فاکتور ================= -->
+<div id="modalInvoice" class="fg-modal">
+    <div class="fg-modal-box" style="max-width:900px;">
+        <div class="fg-modal-head no-print">
+            <h3><i class="fas fa-file-invoice"></i> پیش‌فاکتور</h3>
+            <button class="fg-modal-close" onclick="closeModal('modalInvoice')">×</button>
+        </div>
+        <div class="fg-modal-body" id="invoiceContent"></div>
+        <div class="fg-modal-foot no-print">
+            <button class="fg-btn fg-btn-secondary" onclick="closeModal('modalInvoice')">بستن</button>
+            <button class="fg-btn fg-btn-primary" onclick="window.print()"><i class="fas fa-print"></i> چاپ</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= Modal جزئیات درخواست ================= -->
+<div id="modalRequest" class="fg-modal">
+    <div class="fg-modal-box">
+        <div class="fg-modal-head">
+            <h3><i class="fas fa-info-circle"></i> جزئیات درخواست</h3>
+            <button class="fg-modal-close" onclick="closeModal('modalRequest')">×</button>
+        </div>
+        <div class="fg-modal-body" id="requestDetailContent"></div>
+        <div class="fg-modal-foot">
+            <button class="fg-btn fg-btn-secondary" onclick="closeModal('modalRequest')">بستن</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ============================================================
+   تعریف دسترسی‌ها
+   ============================================================ */
+const PERMISSIONS = [
+    { key: 'dashboard',         label: 'مشاهده داشبورد',              icon: 'fa-tachometer-alt' },
+    { key: 'requests',          label: 'مشاهده درخواست‌ها',           icon: 'fa-clipboard-list' },
+    { key: 'requests_create',   label: 'ثبت درخواست جدید',            icon: 'fa-plus-circle' },
+    { key: 'customers',         label: 'مشاهده مشتریان',              icon: 'fa-users' },
+    { key: 'customers_edit',    label: 'ویرایش/افزودن مشتری',         icon: 'fa-user-edit' },
+    { key: 'pricing',           label: 'بخش تعیین قیمت',              icon: 'fa-calculator', sensitive: true },
+    { key: 'pricing_solvent',   label: 'قیمت‌گذاری حلال',             icon: 'fa-flask', sensitive: true },
+    { key: 'pricing_wax',       label: 'قیمت‌گذاری واکس',             icon: 'fa-cube', sensitive: true },
+    { key: 'preinvoice',        label: 'مشاهده پیش‌فاکتورها',         icon: 'fa-file-invoice', sensitive: true },
+    { key: 'preinvoice_create', label: 'صدور پیش‌فاکتور',            icon: 'fa-file-plus', sensitive: true },
+    { key: 'preinvoice_price',  label: 'مشاهده قیمت و مبالغ',         icon: 'fa-money-bill', sensitive: true },
+    { key: 'approvals',         label: 'تایید/رد',                    icon: 'fa-check-circle', sensitive: true },
+    { key: 'tickets',           label: 'تیکت‌ها',                     icon: 'fa-ticket-alt' },
+    { key: 'orgchart',          label: 'چارت سازمانی',                icon: 'fa-sitemap' },
+    { key: 'users',             label: 'مدیریت کاربران',              icon: 'fa-user-cog', sensitive: true }
+];
+
+/* ============================================================
+   پایگاه داده
+   ============================================================ */
+let DB = {
+    customers: [], requests: [], solventPrices: [], waxTable: [],
+    waxPriceHistory: [], preInvoices: [], tickets: [], users: [],
+    approvals: [], roles: [], products: []
+};
+
+let CURRENT_USER = null;
+
+function saveDB() {
+    try {
+        localStorage.setItem('dena_erp_db', JSON.stringify(DB));
+    } catch(e) { console.error('Save failed:', e); }
+}
+
+function loadDB() {
+    const s = localStorage.getItem('dena_erp_db');
+    if (s) {
+        try {
+            DB = JSON.parse(s);
+            if (!DB.roles || DB.roles.length === 0) DB.roles = getDefaultRoles();
+            if (!DB.users) DB.users = [];
+            if (!DB.products || DB.products.length === 0) DB.products = getDefaultProducts();
+        } catch(e) {
+            initSampleData();
+            saveDB();
+        }
+    } else {
+        initSampleData();
+        saveDB();
+    }
+}
+
+function getDefaultProducts() {
+    return [
+        { id: 1, name: 'حلال', category: 'solvent' },
+        { id: 2, name: 'متیلن', category: 'solvent' },
+        { id: 3, name: 'D.M.F', category: 'solvent' },
+        { id: 4, name: 'D.O.P', category: 'solvent' },
+        { id: 5, name: 'واکس پارافین 1', category: 'wax' },
+        { id: 6, name: 'واکس پارافین 2', category: 'wax' },
+        { id: 7, name: 'واکس میکروکریستالین', category: 'wax' }
+    ];
+}
+
+function getDefaultRoles() {
+    return [
+        {
+            id: 'admin', name: 'مدیر سیستم', desc: 'دسترسی کامل', system: true,
+            perms: PERMISSIONS.map(p => p.key)
+        },
+        {
+            id: 'sales_manager', name: 'مدیر بازرگانی', desc: 'تایید قیمت و پیش‌فاکتور', system: true,
+            perms: [
+                'dashboard', 'requests', 'customers', 'customers_edit',
+                'pricing', 'pricing_solvent', 'pricing_wax',
+                'preinvoice', 'preinvoice_create', 'preinvoice_price',
+                'approvals', 'tickets', 'orgchart'
+            ]
+        },
+        {
+            id: 'sales_expert', name: 'کارشناس فروش', desc: 'ثبت و صدور', system: true,
+            perms: [
+                'dashboard', 'requests', 'requests_create', 'customers', 'customers_edit',
+                'pricing', 'pricing_solvent', 'pricing_wax',
+                'preinvoice', 'preinvoice_create', 'preinvoice_price',
+                'tickets', 'orgchart'
+            ]
+        },
+        {
+            id: 'production', name: 'واحد تولید', desc: 'مشاهده درخواست‌ها', system: true,
+            perms: ['dashboard', 'requests', 'tickets']
+        },
+        {
+            id: 'finance', name: 'واحد مالی', desc: 'مشاهده پیش‌فاکتور', system: true,
+            perms: ['dashboard', 'preinvoice', 'preinvoice_price', 'approvals']
+        }
+    ];
+}
+
+function initSampleData() {
+    DB.roles = getDefaultRoles();
+    DB.products = getDefaultProducts();
+
+    DB.customers = [
+        {
+            id: 1, companyName: 'گروه تولیدی و بازرگانی آسه تجارت آسیا',
+            economicCode: '411487489141', nationalId: '14005126109',
+            regNumber: '476617', postalCode: '1937744363',
+            phone: '021-7592', mobile: '09121234567', saleType: 'formal',
+            address: 'تهران - جردن - پلاک 21', contactPerson: 'آقای رضایی'
+        },
+        {
+            id: 2, companyName: 'صنایع شیمیایی البرز',
+            economicCode: '411222333444', nationalId: '14002233445',
+            regNumber: '123456', postalCode: '3145678901',
+            phone: '026-34567890', mobile: '09129876543', saleType: 'informal',
+            address: 'کرج', contactPerson: 'آقای محمدی'
+        },
+        {
+            id: 3, companyName: 'داروسازی رازی',
+            economicCode: '411555666777', nationalId: '14003344556',
+            regNumber: '789012', postalCode: '5156789012',
+            phone: '041-33445566', mobile: '09141234567', saleType: 'formal',
+            address: 'تبریز', contactPerson: 'خانم حسینی'
+        }
+    ];
+
+    DB.requests = [{
+        id: 1, customerId: 1, productType: 'حلال', quantity: 1000,
+        date: '1405/03/19', status: 'new', notes: 'قیمت ویژه',
+        createdAt: new Date().toISOString()
+    }];
+
+    DB.solventPrices = [{
+        id: 1, product: 'حلال', supplier: 'پتروشیمی شازند',
+        date: '1405/03/15', buyPrice: 4350000, profit: 10,
+        profitAmount: 435000, finalPrice: 4785000,
+        buyType: 'رسمی', notes: '', status: 'pending'
+    }];
+
+    DB.waxTable = [
+        { id: 1, name: 'واکس پارافین 1', minPrice: 45000, maxPrice: 55000, basePrice: 50000, year: '1405' },
+        { id: 2, name: 'واکس پارافین 2', minPrice: 60000, maxPrice: 75000, basePrice: 68000, year: '1405' },
+        { id: 3, name: 'واکس میکروکریستالین', minPrice: 85000, maxPrice: 110000, basePrice: 95000, year: '1405' }
+    ];
+
+    DB.preInvoices = [{
+        id: 1, invoiceNo: 'QUT-D405014', date: '1405/03/19',
+        customerId: 1, product: 'D.O.P', quantity: 1000, unitPrice: 4370000,
+        total: 4370000000, tax: 437000000, finalTotal: 4807000000,
+        status: 'pending_approval'
+    }];
+
+    DB.users = [
+        { id: 1, fullName: 'مدیر سیستم', username: 'admin', password: 'admin', roleId: 'admin', status: 'active', customPerms: null },
+        { id: 2, fullName: 'مدیر بازرگانی', username: 'manager', password: '1234', roleId: 'sales_manager', status: 'active', customPerms: null },
+        { id: 3, fullName: 'کارشناس فروش', username: 'expert', password: '1234', roleId: 'sales_expert', status: 'active', customPerms: null },
+        { id: 4, fullName: 'واحد تولید', username: 'production', password: '1234', roleId: 'production', status: 'active', customPerms: null }
+    ];
+
+    DB.approvals = [];
+    DB.tickets = [];
+    DB.waxPriceHistory = [];
+}
+
+/* ============================================================
+   توابع کمکی
+   ============================================================ */
+function faNum(n) { return (n || 0).toLocaleString('fa-IR'); }
+function openModal(id) { const e = document.getElementById(id); if (e) e.classList.add('active'); }
+function closeModal(id) { const e = document.getElementById(id); if (e) e.classList.remove('active'); }
+
+function toPersian(date) {
+    const gy = date.getFullYear(), gm = date.getMonth() + 1, gd = date.getDate();
+    let jy = gy - 1600, jm = gm - 1, jd = gd - 1;
+    let gdn = 365 * jy + Math.floor((jy + 3) / 4) - Math.floor((jy + 99) / 100) + Math.floor((jy + 399) / 400);
+    for (let i = 0; i < jm; i++) {
+        gdn += [31, 28 + ((jy % 4 === 0 && jy % 100 !== 0) || jy % 400 === 0 ? 1 : 0), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][i];
+    }
+    gdn += jd;
+    let jdn = gdn - 79, jnp = Math.floor(jdn / 12053); jdn %= 12053;
+    jy = 979 + 33 * jnp + 4 * Math.floor(jdn / 1461); jdn %= 1461;
+    if (jdn >= 366) { jy += Math.floor((jdn - 1) / 365); jdn = (jdn - 1) % 365; }
+    jm = (jdn < 186) ? 1 + Math.floor(jdn / 31) : 7 + Math.floor((jdn - 186) / 30);
+    jd = 1 + ((jdn < 186) ? (jdn % 31) : ((jdn - 186) % 30));
+    return { y: jy, m: jm, d: jd };
+}
+
+function todayPersian() {
+    const p = toPersian(new Date());
+    return `${p.y}/${String(p.m).padStart(2, '0')}/${String(p.d).padStart(2, '0')}`;
+}
+
+function updateClock() {
+    const now = new Date();
+    const p = toPersian(now);
+    const months = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+    const days = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'];
+    const e1 = document.getElementById('clockDate');
+    const e2 = document.getElementById('clockTime');
+    if (e1) e1.textContent = `${days[now.getDay()]} ${p.d} ${months[p.m - 1]} ${p.y}`;
+    if (e2) e2.textContent = now.toLocaleTimeString('fa-IR');
+}
+
+function generateFutureDates() {
+    const dates = [];
+    const today = new Date();
+    const dayNames = ['یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه', 'شنبه'];
+    const monthNames = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+    for (let i = 0; i <= 60; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        const p = toPersian(d);
+        const val = `${p.y}/${String(p.m).padStart(2, '0')}/${String(p.d).padStart(2, '0')}`;
+        let label = `${p.d} ${monthNames[p.m - 1]} ${p.y} - ${dayNames[d.getDay()]}`;
+        if (i === 0) label += ' (امروز)';
+        else if (i === 1) label += ' (فردا)';
+        dates.push({ value: val, label });
+    }
+    return dates;
+}
+
+function populateDateSelect(selectId) {
+    const sel = document.getElementById(selectId);
+    if (!sel) return;
+    const dates = generateFutureDates();
+    sel.innerHTML = '<option value="">انتخاب تاریخ...</option>' +
+        dates.map(d => `<option value="${d.value}">${d.label}</option>`).join('');
+}
+
+/* ============================================================
+   دسترسی‌ها
+   ============================================================ */
+function getUserRole(user) {
+    if (!user) return null;
+    return DB.roles.find(r => r.id === user.roleId);
+}
+
+function getUserPermissions(user) {
+    if (!user) return [];
+    if (user.customPerms && Array.isArray(user.customPerms)) return user.customPerms;
+    const role = getUserRole(user);
+    return role ? role.perms : [];
+}
+
+function hasPerm(permKey) {
+    if (!CURRENT_USER) return false;
+    return getUserPermissions(CURRENT_USER).includes(permKey);
+}
+
+function applyPermissions() {
+    if (!CURRENT_USER) return;
+    const perms = getUserPermissions(CURRENT_USER);
+    document.querySelectorAll('.fg-menu li[data-perm]').forEach(li => {
+        const key = li.getAttribute('data-perm');
+        if (!perms.includes(key)) li.classList.add('hidden');
+        else li.classList.remove('hidden');
+    });
+}
+
+/* ============================================================
+   ورود / خروج
+   ============================================================ */
+function handleLogin(e) {
+    e.preventDefault();
+    const u = document.getElementById('loginUser').value.trim();
+    const p = document.getElementById('loginPass').value;
+    const errEl = document.getElementById('loginError');
+    const user = DB.users.find(x => x.username === u && x.password === p && x.status === 'active');
+    if (!user) {
+        errEl.textContent = 'نام کاربری یا رمز عبور نادرست است.';
+        errEl.classList.add('show');
+        return false;
+    }
+    errEl.classList.remove('show');
+    CURRENT_USER = user;
+    sessionStorage.setItem('dena_logged_user', JSON.stringify(user));
+    const role = getUserRole(user);
+    document.getElementById('currentUserName').textContent = user.fullName;
+    document.getElementById('currentUserRole').textContent = role ? `(${role.name})` : '';
+    document.getElementById('loginOverlay').classList.add('hidden');
+    applyPermissions();
+    refreshAllViews();
+    return false;
+}
+
+function logout() {
+    if (!confirm('از سامانه خارج می‌شوید؟')) return;
+    CURRENT_USER = null;
+    sessionStorage.removeItem('dena_logged_user');
+    document.getElementById('loginOverlay').classList.remove('hidden');
+    document.getElementById('loginForm').reset();
+    document.getElementById('loginError').classList.remove('show');
+}
+
+function checkAutoLogin() {
+    const saved = sessionStorage.getItem('dena_logged_user');
+    if (saved) {
+        try {
+            const user = JSON.parse(saved);
+            const found = DB.users.find(x => x.id === user.id && x.status === 'active');
+            if (found) {
+                CURRENT_USER = found;
+                const role = getUserRole(found);
+                document.getElementById('currentUserName').textContent = found.fullName;
+                document.getElementById('currentUserRole').textContent = role ? `(${role.name})` : '';
+                document.getElementById('loginOverlay').classList.add('hidden');
+                return true;
+            }
+        } catch(e) {}
+    }
+    document.getElementById('loginOverlay').classList.remove('hidden');
+    return false;
+}
+
+/* ============================================================
+   تم
+   ============================================================ */
+function toggleTheme() {
+    const isDark = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('dena_theme', isDark ? 'dark' : 'light');
+    updateThemeIcon(isDark);
+}
+
+function updateThemeIcon(isDark) {
+    const icon = document.getElementById('themeIcon');
+    if (!icon) return;
+    icon.classList.remove('fa-moon', 'fa-sun');
+    icon.classList.add(isDark ? 'fa-sun' : 'fa-moon');
+}
+
+function loadTheme() {
+    const saved = localStorage.getItem('dena_theme');
+    if (saved === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeIcon(true);
+    } else {
+        updateThemeIcon(false);
+    }
+}
+
+/* ============================================================
+   ناوبری
+   ============================================================ */
+function setupNav() {
+    document.querySelectorAll('.fg-menu-item[data-page]').forEach(item => {
+        item.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelectorAll('.fg-menu-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.fg-page').forEach(p => p.classList.remove('active'));
+            item.classList.add('active');
+            const page = item.dataset.page;
+            const el = document.getElementById('page-' + page);
+            if (el) el.classList.add('active');
+        });
+    });
+    const pm = document.getElementById('menuPricing');
+    const ps = document.getElementById('subPricing');
+    if (pm) {
+        pm.addEventListener('click', e => {
+            e.preventDefault();
+            pm.classList.toggle('open');
+            ps.classList.toggle('open');
+        });
+    }
+}
+
+/* ============================================================
+   اعتبارسنجی
+   ============================================================ */
+function showError(input, msg) {
+    input.classList.add('invalid');
+    input.classList.remove('valid');
+    const name = input.getAttribute('name');
+    const err = document.querySelector(`.fg-error-msg[data-for="${name}"]`);
+    if (err) {
+        if (msg) err.textContent = msg;
+        err.classList.add('show');
+    }
+}
+
+function showSuccess(input) {
+    input.classList.remove('invalid');
+    input.classList.add('valid');
+    const name = input.getAttribute('name');
+    const err = document.querySelector(`.fg-error-msg[data-for="${name}"]`);
+    if (err) err.classList.remove('show');
+}
+
+function clearError(input) {
+    input.classList.remove('invalid', 'valid');
+    const name = input.getAttribute('name');
+    const err = document.querySelector(`.fg-error-msg[data-for="${name}"]`);
+    if (err) err.classList.remove('show');
+}
+
+/* ============================================================
+   پر کردن سلکت‌ها
+   ============================================================ */
+function fillCustomerSelects() {
+    const options = '<option value="">انتخاب مشتری...</option>' +
+        DB.customers.map(c => `<option value="${c.id}">${c.companyName}</option>`).join('');
+    ['pi_customer', 'waxCustomer', 'req_customer'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = options;
+    });
+}
+
+function fillProductSelects() {
+    if (!DB.products) return;
+
+    const solventProducts = DB.products.filter(p => p.category === 'solvent');
+
+    const sel1 = document.getElementById('solventProductSelect');
+    if (sel1) {
+        sel1.innerHTML = '<option value="">انتخاب...</option>' +
+            solventProducts.map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+    }
+
+    const sel2 = document.getElementById('pi_product');
+    if (sel2) {
+        sel2.innerHTML = '<option value="">انتخاب...</option>' +
+            DB.products.map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+    }
+
+    const sel3 = document.getElementById('req_product');
+    if (sel3) {
+        sel3.innerHTML = '<option value="">انتخاب...</option>' +
+            DB.products.map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+    }
+
+    const filterSel = document.getElementById('filterProduct');
+    if (filterSel) {
+        const current = filterSel.value;
+        filterSel.innerHTML = '<option value="">همه محصولات</option>' +
+            DB.products.map(p => `<option value="${p.name}">${p.name}</option>`).join('');
+        filterSel.value = current;
+    }
+}
+
+/* ============================================================
+   مدیریت محصولات
+   ============================================================ */
+function renderProductsTable() {
+    const tbody = document.getElementById('productsTable');
+    if (!tbody) return;
+    if (!DB.products || DB.products.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="fg-empty">محصولی نیست</td></tr>';
+        return;
+    }
+
+    const catMap = {
+        solvent: { txt: 'حلال و شیمیایی', cls: 'fg-badge-primary' },
+        wax: { txt: 'واکس', cls: 'fg-badge-warning' },
+        other: { txt: 'سایر', cls: 'fg-badge-secondary' }
+    };
+
+    const canEdit = hasPerm('pricing_solvent');
+
+    tbody.innerHTML = DB.products.map((p, i) => {
+        const cat = catMap[p.category] || catMap.other;
+        return `<tr>
+            <td>${i + 1}</td>
+            <td><strong>${p.name}</strong></td>
+            <td><span class="fg-badge ${cat.cls}">${cat.txt}</span></td>
+            <td>
+                ${canEdit ? `
+                    <button class="fg-action-btn" onclick="editProduct(${p.id})" title="ویرایش"><i class="fas fa-edit"></i></button>
+                    <button class="fg-action-btn danger" onclick="deleteProduct(${p.id})" title="حذف"><i class="fas fa-trash"></i></button>
+                ` : '<span style="color:var(--fg-text-muted);font-size:11px;">مشاهده</span>'}
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function openProductModal(id = null) {
+    if (!hasPerm('pricing_solvent') && !hasPerm('pricing')) {
+        return alert('⛔ دسترسی ندارید');
+    }
+    const p = id ? DB.products.find(x => x.id === id) : null;
+    document.getElementById('editProductId').value = id || '';
+    document.getElementById('productName').value = p ? p.name : '';
+    document.getElementById('productCategory').value = p ? p.category : 'solvent';
+    document.getElementById('productModalTitle').textContent = p ? 'ویرایش: ' + p.name : 'افزودن محصول جدید';
+    openModal('modalProduct');
+}
+
+function saveProduct() {
+    if (!hasPerm('pricing_solvent') && !hasPerm('pricing')) return alert('⛔ دسترسی ندارید');
+    const name = document.getElementById('productName').value.trim();
+    const category = document.getElementById('productCategory').value;
+    if (!name) return alert('نام محصول الزامی است');
+
+    const editId = document.getElementById('editProductId').value;
+
+    if (editId) {
+        const p = DB.products.find(x => x.id === parseInt(editId));
+        if (p) {
+            p.name = name;
+            p.category = category;
+        }
+        alert('✅ محصول ویرایش شد.');
+    } else {
+        if (DB.products.some(p => p.name === name)) {
+            return alert('❌ این محصول قبلاً ثبت شده');
+        }
+        DB.products.push({ id: Date.now(), name, category });
+        alert('✅ محصول جدید اضافه شد.');
+    }
+
+    saveDB();
+    renderProductsTable();
+    fillProductSelects();
+    closeModal('modalProduct');
+}
+
+function editProduct(id) {
+    openProductModal(id);
+}
+
+function deleteProduct(id) {
+    if (!hasPerm('pricing_solvent') && !hasPerm('pricing')) return alert('⛔ دسترسی ندارید');
+    const p = DB.products.find(x => x.id === id);
+    if (!p) return;
+
+    const usedInPrices = DB.solventPrices.some(sp => sp.product === p.name);
+    const usedInInvoices = DB.preInvoices.some(pi => pi.product === p.name);
+
+    if (usedInPrices || usedInInvoices) {
+        if (!confirm(`⚠️ محصول "${p.name}" در قیمت‌ها یا پیش‌فاکتورها استفاده شده. با این حال حذف شود؟`)) return;
+    } else {
+        if (!confirm(`حذف محصول "${p.name}"؟`)) return;
+    }
+
+    DB.products = DB.products.filter(x => x.id !== id);
+    saveDB();
+    renderProductsTable();
+    fillProductSelects();
+}
+
+/* ============================================================
+   مشتریان
+   ============================================================ */
+function renderCustomers() {
+    const search = (document.getElementById('searchCustomer')?.value || '').toLowerCase();
+    const filterType = document.getElementById('searchSaleType')?.value || '';
+    const list = DB.customers.filter(c => {
+        const m1 = !search || c.companyName.toLowerCase().includes(search);
+        const m2 = !filterType || c.saleType === filterType;
+        return m1 && m2;
+    });
+    const tbody = document.getElementById('customersTable');
+    if (!tbody) return;
+    if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="fg-empty">مشتری‌ای نیست</td></tr>';
+        return;
+    }
+    const canEdit = hasPerm('customers_edit');
+    tbody.innerHTML = list.map((c, i) => `
+        <tr>
+            <td>${i + 1}</td>
+            <td><strong>${c.companyName}</strong></td>
+            <td>${c.mobile || '-'}</td>
+            <td>${c.postalCode || '-'}</td>
+            <td><span class="fg-badge ${c.saleType === 'formal' ? 'fg-badge-primary' : 'fg-badge-info'}">${c.saleType === 'formal' ? 'رسمی' : 'غیررسمی'}</span></td>
+            <td>${c.contactPerson || '-'}</td>
+            <td>
+                ${canEdit ? `
+                    <button class="fg-action-btn" onclick="editCustomer(${c.id})" title="ویرایش"><i class="fas fa-edit"></i></button>
+                    <button class="fg-action-btn danger" onclick="deleteCustomer(${c.id})" title="حذف"><i class="fas fa-trash"></i></button>
+                ` : '<span style="color:var(--fg-text-muted);font-size:11px;">مشاهده</span>'}
+            </td>
+        </tr>
+    `).join('');
+}
+
+function validateCustomerField(input) {
+    const name = input.getAttribute('name');
+    const val = (input.value || '').trim();
+
+    if (name === 'companyName') {
+        if (!val) { showError(input, 'الزامی'); return false; }
+        if (val.length < 2) { showError(input, 'حداقل ۲ حرف'); return false; }
+        showSuccess(input); return true;
+    }
+    if (name === 'economicCode') {
+        if (!val) { showError(input, 'الزامی'); return false; }
+        if (!/^\d{12}$/.test(val)) { showError(input, '۱۲ رقم'); return false; }
+        showSuccess(input); return true;
+    }
+    if (name === 'nationalId') {
+        if (!val) { showError(input, 'الزامی'); return false; }
+        if (!/^\d{11}$/.test(val)) { showError(input, '۱۱ رقم'); return false; }
+        showSuccess(input); return true;
+    }
+    if (name === 'regNumber') {
+        if (!val) { showError(input, 'الزامی'); return false; }
+        if (!/^\d{3,10}$/.test(val)) { showError(input, '۳-۱۰ رقم'); return false; }
+        showSuccess(input); return true;
+    }
+    if (name === 'postalCode') {
+        if (!val) { showError(input, 'الزامی'); return false; }
+        if (!/^\d{10}$/.test(val)) { showError(input, '۱۰ رقم'); return false; }
+        showSuccess(input); return true;
+    }
+    if (name === 'phone') {
+        if (!val) { clearError(input); return true; }
+        const digits = val.replace(/[^0-9]/g, '');
+        if (digits.length < 8 || digits.length > 11) { showError(input, '۸-۱۱ رقم'); return false; }
+        showSuccess(input); return true;
+    }
+    if (name === 'mobile') {
+        if (!val) { showError(input, 'الزامی'); return false; }
+        if (!/^09\d{9}$/.test(val)) { showError(input, '۱۱ رقم با ۰۹'); return false; }
+        showSuccess(input); return true;
+    }
+    if (name === 'saleType') {
+        if (!val) { showError(input, 'الزامی'); return false; }
+        showSuccess(input); return true;
+    }
+    return true;
+}
+
+function handleCustomerSubmit(e) {
+    e.preventDefault();
+    const f = e.target;
+    const fields = ['companyName', 'economicCode', 'nationalId', 'regNumber', 'postalCode', 'phone', 'mobile', 'saleType'];
+    let ok = true;
+    fields.forEach(n => {
+        const inp = f.querySelector(`[name="${n}"]`);
+        if (inp && !validateCustomerField(inp)) ok = false;
+    });
+    if (!ok) { alert('❌ خطاهای فرم را برطرف کنید'); return; }
+
+    const editId = document.getElementById('editCustomerId').value;
+    const data = {
+        companyName: f.companyName.value.trim(),
+        economicCode: f.economicCode.value.trim(),
+        nationalId: f.nationalId.value.trim(),
+        regNumber: f.regNumber.value.trim(),
+        postalCode: f.postalCode.value.trim(),
+        phone: f.phone.value.trim(),
+        mobile: f.mobile.value.trim(),
+        saleType: f.saleType.value,
+        address: f.address.value.trim(),
+        contactPerson: f.contactPerson.value.trim()
+    };
+
+    if (editId) {
+        const i = DB.customers.findIndex(c => c.id === parseInt(editId));
+        if (i !== -1) DB.customers[i] = { ...DB.customers[i], ...data };
+        alert('✅ مشتری ویرایش شد.');
+        cancelCustomerEdit();
+    } else {
+        data.id = Date.now();
+        DB.customers.push(data);
+        alert('✅ مشتری جدید اضافه شد.');
+    }
+
+    saveDB();
+    fillCustomerSelects();
+    renderCustomers();
+    renderDashboard();
+    f.reset();
+    f.querySelectorAll('input, select, textarea').forEach(el => clearError(el));
+}
+
+function editCustomer(id) {
+    if (!hasPerm('customers_edit')) return alert('⛔ دسترسی ندارید');
+    const c = DB.customers.find(x => x.id === id);
+    if (!c) return;
+    const f = document.getElementById('customerForm');
+    f.companyName.value = c.companyName || '';
+    f.economicCode.value = c.economicCode || '';
+    f.nationalId.value = c.nationalId || '';
+    f.regNumber.value = c.regNumber || '';
+    f.postalCode.value = c.postalCode || '';
+    f.phone.value = c.phone || '';
+    f.mobile.value = c.mobile || '';
+    f.saleType.value = c.saleType || '';
+    f.address.value = c.address || '';
+    f.contactPerson.value = c.contactPerson || '';
+    document.getElementById('editCustomerId').value = id;
+    document.getElementById('customerFormTitle').textContent = 'ویرایش: ' + c.companyName;
+    document.getElementById('submitCustBtnText').textContent = 'ذخیره';
+    document.getElementById('cancelEditCust').style.display = 'inline-flex';
+    f.scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelCustomerEdit() {
+    const f = document.getElementById('customerForm');
+    f.reset();
+    f.querySelectorAll('input, select, textarea').forEach(el => clearError(el));
+    document.getElementById('editCustomerId').value = '';
+    document.getElementById('customerFormTitle').textContent = 'افزودن مشتری جدید';
+    document.getElementById('submitCustBtnText').textContent = 'افزودن';
+    document.getElementById('cancelEditCust').style.display = 'none';
+}
+
+function deleteCustomer(id) {
+    if (!hasPerm('customers_edit')) return alert('⛔ دسترسی ندارید');
+    if (!confirm('حذف مشتری؟')) return;
+    DB.customers = DB.customers.filter(c => c.id !== id);
+    saveDB();
+    fillCustomerSelects();
+    renderCustomers();
+    renderDashboard();
+}
+
+/* ============================================================
+   درخواست‌ها
+   ============================================================ */
+function handleRequestSubmit(e) {
+    e.preventDefault();
+    if (!hasPerm('requests_create')) return alert('⛔ دسترسی ندارید');
+    const fd = new FormData(e.target);
+    if (!fd.get('customerId')) return alert('❌ مشتری الزامی');
+    if (!fd.get('productType')) return alert('❌ محصول الزامی');
+    if (!fd.get('quantity') || parseFloat(fd.get('quantity')) <= 0) return alert('❌ مقدار نامعتبر');
+    if (!fd.get('date')) return alert('❌ تاریخ الزامی');
+
+    DB.requests.unshift({
+        id: Date.now(),
+        customerId: parseInt(fd.get('customerId')),
+        productType: fd.get('productType'),
+        quantity: parseFloat(fd.get('quantity')),
+        date: fd.get('date'),
+        notes: fd.get('notes') || '',
+        status: 'new',
+        createdAt: new Date().toISOString()
+    });
+
+    saveDB();
+    renderRequests();
+    renderDashboard();
+    e.target.reset();
+    alert('✅ درخواست ثبت شد.');
+}
+
+function renderRequests() {
+    const tbody = document.getElementById('requestsTable');
+    if (!tbody) return;
+    const fName = (document.getElementById('filterCustomer')?.value || '').toLowerCase();
+    const fProduct = document.getElementById('filterProduct')?.value || '';
+    const fStatus = document.getElementById('filterStatus')?.value || '';
+    const list = DB.requests.filter(r => {
+        const c = DB.customers.find(x => x.id === r.customerId);
+        const cn = c ? c.companyName.toLowerCase() : '';
+        return (!fName || cn.includes(fName)) &&
+               (!fProduct || r.productType === fProduct) &&
+               (!fStatus || r.status === fStatus);
+    });
+    if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="fg-empty">درخواستی نیست</td></tr>';
+        return;
+    }
+    const stMap = {
+        new: { txt: 'جدید', cls: 'fg-badge-primary' },
+        review: { txt: 'در بررسی', cls: 'fg-badge-info' },
+        priced: { txt: 'قیمت‌گذاری', cls: 'fg-badge-warning' },
+        invoiced: { txt: 'پیش‌فاکتور', cls: 'fg-badge-warning' },
+        approved: { txt: 'تایید', cls: 'fg-badge-success' },
+        paid: { txt: 'واریز', cls: 'fg-badge-success' },
+        produced: { txt: 'تولید', cls: 'fg-badge-success' },
+        sent: { txt: 'ارسال', cls: 'fg-badge-secondary' }
+    };
+    const canDel = hasPerm('requests_create');
+    tbody.innerHTML = list.map((r, i) => {
+        const c = DB.customers.find(x => x.id === r.customerId);
+        const s = stMap[r.status] || stMap.new;
+        return `<tr>
+            <td>${i + 1}</td>
+            <td>${c ? c.companyName : '?'}</td>
+            <td>${r.productType}</td>
+            <td>${faNum(r.quantity)}</td>
+            <td>${r.date}</td>
+            <td><span class="fg-badge ${s.cls}">${s.txt}</span></td>
+            <td>
+                <button class="fg-action-btn info" onclick="showRequestDetail(${r.id})" title="جزئیات"><i class="fas fa-info-circle"></i></button>
+                ${canDel ? `<button class="fg-action-btn danger" onclick="deleteRequest(${r.id})" title="حذف"><i class="fas fa-trash"></i></button>` : ''}
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function deleteRequest(id) {
+    if (!hasPerm('requests_create')) return alert('⛔ دسترسی ندارید');
+    if (!confirm('حذف؟')) return;
+    DB.requests = DB.requests.filter(r => r.id !== id);
+    saveDB();
+    renderRequests();
+    renderDashboard();
+}
+
+function showRequestDetail(id) {
+    const r = DB.requests.find(x => x.id === id);
+    if (!r) return;
+    const c = DB.customers.find(x => x.id === r.customerId);
+    document.getElementById('requestDetailContent').innerHTML = `
+        <div class="fg-invoice-section">
+            <div class="fg-invoice-section-title">مشتری</div>
+            <div class="fg-invoice-section-body">
+                <div class="row">
+                    <strong>نام:</strong><span>${c ? c.companyName : '-'}</span>
+                    <strong>موبایل:</strong><span>${c ? c.mobile : '-'}</span>
+                </div>
+            </div>
+        </div>
+        <div class="fg-invoice-section">
+            <div class="fg-invoice-section-title">درخواست</div>
+            <div class="fg-invoice-section-body">
+                <div class="row">
+                    <strong>محصول:</strong><span>${r.productType}</span>
+                    <strong>مقدار:</strong><span>${faNum(r.quantity)} kg</span>
+                </div>
+                <div class="row">
+                    <strong>تاریخ:</strong><span>${r.date}</span>
+                    <strong>وضعیت:</strong><span>${r.status}</span>
+                </div>
+                <div style="margin-top:8px;"><strong>توضیحات:</strong> ${r.notes || '-'}</div>
+            </div>
+        </div>
+    `;
+    openModal('modalRequest');
+}
+
+/* ============================================================
+   تعیین قیمت حلال
+   ============================================================ */
+function calcSolvent() {
+    const buy = parseFloat(document.getElementById('solventBuy')?.value) || 0;
+    const profit = parseFloat(document.getElementById('solventProfit')?.value) || 0;
+    const pa = Math.round(buy * profit / 100);
+    const final = buy + pa;
+    const pEl = document.getElementById('solventProfitAmount');
+    const fEl = document.getElementById('solventFinal');
+    if (pEl) pEl.value = faNum(pa);
+    if (fEl) fEl.value = faNum(final);
+}
+
+function handleSolventSubmit(e) {
+    e.preventDefault();
+    if (!hasPerm('pricing_solvent')) return alert('⛔ دسترسی ندارید');
+    const fd = new FormData(e.target);
+    const buy = parseFloat(fd.get('buyPrice')) || 0;
+    const profit = parseFloat(fd.get('profit')) || 0;
+    const final = buy + Math.round(buy * profit / 100);
+    const record = {
+        id: Date.now(),
+        product: fd.get('product'),
+        supplier: fd.get('supplier'),
+        date: fd.get('date') || todayPersian(),
+        buyPrice: buy,
+        profit: profit,
+        profitAmount: Math.round(buy * profit / 100),
+        finalPrice: final,
+        buyType: fd.get('buyType'),
+        notes: fd.get('notes') || '',
+        status: 'pending'
+    };
+    DB.solventPrices.unshift(record);
+    DB.approvals.unshift({
+        id: Date.now() + 1,
+        type: 'price',
+        refId: record.id,
+        title: `تایید قیمت ${record.product} - ${record.supplier}`,
+        amount: record.finalPrice,
+        requestedBy: CURRENT_USER?.fullName || '?',
+        assignedTo: 'مدیر بازرگانی',
+        status: 'pending',
+        date: record.date,
+        note: ''
+    });
+    saveDB();
+    renderSolventPrices();
+    renderApprovals();
+    e.target.reset();
+    document.getElementById('solventDate').value = todayPersian();
+    calcSolvent();
+    alert('✅ قیمت ثبت و ارجاع شد.');
+}
+
+function renderSolventPrices() {
+    const tbody = document.getElementById('solventPriceTable');
+    if (!tbody) return;
+    const fp = (document.getElementById('filterSolventProduct')?.value || '').toLowerCase();
+    const ft = document.getElementById('filterSolventType')?.value || '';
+    const fs = document.getElementById('filterSolventStatus')?.value || '';
+    const list = DB.solventPrices.filter(p => {
+        const m1 = !fp || p.product.toLowerCase().includes(fp);
+        const m2 = !ft || p.buyType === ft;
+        const m3 = !fs || p.status === fs;
+        return m1 && m2 && m3;
+    });
+    if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10" class="fg-empty">موردی نیست</td></tr>';
+        return;
+    }
+    const sMap = {
+        pending: { txt: 'در انتظار', cls: 'fg-badge-warning' },
+        approved: { txt: 'تایید', cls: 'fg-badge-success' },
+        rejected: { txt: 'رد', cls: 'fg-badge-danger' }
+    };
+    tbody.innerHTML = list.map((p, i) => {
+        const s = sMap[p.status] || sMap.pending;
+        return `<tr>
+            <td>${i + 1}</td>
+            <td><strong>${p.product}</strong></td>
+            <td>${p.supplier}</td>
+            <td>${p.date}</td>
+            <td>${faNum(p.buyPrice)}</td>
+            <td>${p.profit}%</td>
+            <td><strong style="color:var(--fg-primary);">${faNum(p.finalPrice)}</strong></td>
+            <td><span class="fg-badge ${p.buyType === 'رسمی' ? 'fg-badge-primary' : 'fg-badge-info'}">${p.buyType}</span></td>
+            <td><span class="fg-badge ${s.cls}">${s.txt}</span></td>
+            <td>
+                <button class="fg-action-btn" onclick="editSolventPrice(${p.id})" title="ویرایش"><i class="fas fa-edit"></i></button>
+                <button class="fg-action-btn danger" onclick="deleteSolventPrice(${p.id})" title="حذف"><i class="fas fa-trash"></i></button>
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function deleteSolventPrice(id) {
+    if (!hasPerm('pricing_solvent')) return alert('⛔ دسترسی ندارید');
+    if (!confirm('حذف؟')) return;
+    DB.solventPrices = DB.solventPrices.filter(p => p.id !== id);
+    DB.approvals = DB.approvals.filter(a => a.refId !== id);
+    saveDB();
+    renderSolventPrices();
+    renderApprovals();
+}
+
+function editSolventPrice(id) {
+    if (!hasPerm('pricing_solvent')) return alert('⛔ دسترسی ندارید');
+    const p = DB.solventPrices.find(x => x.id === id);
+    if (!p) return;
+    const v = prompt('قیمت نهایی جدید:', p.finalPrice);
+    if (v === null) return;
+    const val = parseFloat(v);
+    if (isNaN(val) || val <= 0) return alert('نامعتبر');
+    p.finalPrice = val;
+    p.status = 'pending';
+    saveDB();
+    renderSolventPrices();
+    alert('✅ ویرایش شد.');
+}
+
+/* ============================================================
+   واکس
+   ============================================================ */
+function renderWaxTable() {
+    const tbody = document.getElementById('waxTableBody');
+    if (!tbody) return;
+    const yr = document.getElementById('waxYearInput')?.value || '1405';
+    const rows = DB.waxTable.filter(w => w.year === yr);
+    if (rows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="fg-empty">ردیفی نیست</td></tr>';
+    } else {
+        tbody.innerHTML = rows.map((w, i) => `
+            <tr>
+                <td>${i + 1}</td>
+                <td><strong>${w.name}</strong></td>
+                <td>${faNum(w.minPrice)}</td>
+                <td>${faNum(w.maxPrice)}</td>
+                <td><strong style="color:var(--fg-primary);">${faNum(w.basePrice)}</strong></td>
+                <td><span class="fg-badge fg-badge-info">${w.year}</span></td>
+                <td>
+                    <button class="fg-action-btn" onclick="editWaxRow(${w.id})" title="ویرایش"><i class="fas fa-edit"></i></button>
+                    <button class="fg-action-btn danger" onclick="deleteWaxRow(${w.id})" title="حذف"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>`).join('');
+    }
+    const sel = document.getElementById('waxTypeSelect');
+    if (sel) {
+        sel.innerHTML = '<option value="">انتخاب...</option>' +
+            rows.map(w => `<option value="${w.id}">${w.name}</option>`).join('');
+    }
+    const yl = document.getElementById('waxCurrentYear');
+    if (yl) yl.textContent = 'سال ' + yr;
+}
+
+function updateWaxYear() {
+    const y = document.getElementById('waxYearInput').value.trim();
+    if (!y) return alert('سال را وارد کنید');
+    renderWaxTable();
+}
+
+function addWaxRow() {
+    if (!hasPerm('pricing_wax')) return alert('⛔ دسترسی ندارید');
+    const name = prompt('نام واکس:');
+    if (!name) return;
+    const min = parseFloat(prompt('حداقل:'));
+    const max = parseFloat(prompt('حداکثر:'));
+    if (isNaN(min) || isNaN(max)) return alert('نامعتبر');
+    DB.waxTable.push({
+        id: Date.now(),
+        name,
+        minPrice: min,
+        maxPrice: max,
+        basePrice: Math.round((min + max) / 2),
+        year: document.getElementById('waxYearInput').value || '1405'
+    });
+    saveDB();
+    renderWaxTable();
+}
+
+function editWaxRow(id) {
+    if (!hasPerm('pricing_wax')) return alert('⛔ دسترسی ندارید');
+    const w = DB.waxTable.find(x => x.id === id);
+    if (!w) return;
+    const v = prompt('قیمت پایه:', w.basePrice);
+    if (v === null) return;
+    const n = parseFloat(v);
+    if (isNaN(n)) return;
+    w.basePrice = n;
+    saveDB();
+    renderWaxTable();
+}
+
+function deleteWaxRow(id) {
+    if (!hasPerm('pricing_wax')) return alert('⛔ دسترسی ندارید');
+    if (!confirm('حذف؟')) return;
+    DB.waxTable = DB.waxTable.filter(x => x.id !== id);
+    saveDB();
+    renderWaxTable();
+}
+
+function fillWaxBasePrice() {
+    const id = parseInt(document.getElementById('waxTypeSelect').value);
+    const w = DB.waxTable.find(x => x.id === id);
+    if (!w) return;
+    document.getElementById('waxRange').value = `${faNum(w.minPrice)} تا ${faNum(w.maxPrice)}`;
+    document.getElementById('waxBasePrice').value = faNum(w.basePrice);
+    document.getElementById('waxFinalPrice').value = w.basePrice;
+    calcWaxDiscount();
+}
+
+function calcWaxDiscount() {
+    const id = parseInt(document.getElementById('waxTypeSelect')?.value);
+    const w = DB.waxTable.find(x => x.id === id);
+    const final = parseFloat(document.getElementById('waxFinalPrice')?.value) || 0;
+    if (!w || !w.basePrice) return;
+    document.getElementById('waxDiscount').value = (((final - w.basePrice) / w.basePrice * 100).toFixed(1)) + ' %';
+}
+
+function showCustomerWaxHistory() {
+    const cid = parseInt(document.getElementById('waxCustomer').value);
+    const box = document.getElementById('customerWaxHistoryBox');
+    const listEl = document.getElementById('customerWaxHistoryList');
+    if (!cid || !box) {
+        if (box) box.style.display = 'none';
+        return;
+    }
+    const hist = DB.waxPriceHistory.filter(h => h.customerId === cid);
+    box.style.display = 'block';
+    listEl.innerHTML = hist.length === 0
+        ? '<em style="color:var(--fg-text-muted);">سابقه‌ای نیست.</em>'
+        : hist.map(h => `
+            <div style="padding:6px 0; border-bottom:1px dashed var(--fg-border);">
+                <strong>${h.waxName}</strong> - ${h.date} - <strong>${faNum(h.finalPrice)}</strong> ریال
+            </div>
+        `).join('');
+}
+
+function handleWaxPriceSubmit(e) {
+    e.preventDefault();
+    if (!hasPerm('pricing_wax')) return alert('⛔ دسترسی ندارید');
+    const fd = new FormData(e.target);
+    const cid = parseInt(fd.get('customerId'));
+    const wid = parseInt(fd.get('waxType'));
+    const finalPrice = parseFloat(fd.get('finalPrice'));
+    const c = DB.customers.find(x => x.id === cid);
+    const w = DB.waxTable.find(x => x.id === wid);
+    if (!c || !w) return alert('اطلاعات ناقص');
+    const recId = Date.now();
+    DB.waxPriceHistory.unshift({
+        id: recId,
+        customerId: cid,
+        customerName: c.companyName,
+        waxId: wid,
+        waxName: w.name,
+        basePrice: w.basePrice,
+        finalPrice,
+        date: todayPersian(),
+        status: 'pending'
+    });
+    DB.approvals.unshift({
+        id: Date.now() + 1,
+        type: 'wax_price',
+        refId: recId,
+        title: `تایید واکس ${w.name} - ${c.companyName}`,
+        amount: finalPrice,
+        requestedBy: CURRENT_USER?.fullName || '?',
+        assignedTo: 'مدیر بازرگانی',
+        status: 'pending',
+        date: todayPersian(),
+        note: ''
+    });
+    saveDB();
+    renderWaxPriceHistory();
+    renderApprovals();
+    e.target.reset();
+    document.getElementById('customerWaxHistoryBox').style.display = 'none';
+    document.getElementById('waxRange').value = '';
+    document.getElementById('waxBasePrice').value = '';
+    document.getElementById('waxDiscount').value = '';
+    alert('✅ ثبت شد.');
+}
+
+function renderWaxPriceHistory() {
+    const tbody = document.getElementById('waxPriceHistoryTable');
+    if (!tbody) return;
+    if (DB.waxPriceHistory.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="fg-empty">قیمتی نیست</td></tr>';
+        return;
+    }
+    const sMap = {
+        pending: { txt: 'در انتظار', cls: 'fg-badge-warning' },
+        approved: { txt: 'تایید', cls: 'fg-badge-success' },
+        rejected: { txt: 'رد', cls: 'fg-badge-danger' }
+    };
+    tbody.innerHTML = DB.waxPriceHistory.map((h, i) => {
+        const s = sMap[h.status] || sMap.pending;
+        return `<tr>
+            <td>${i + 1}</td>
+            <td>${h.customerName}</td>
+            <td>${h.waxName}</td>
+            <td>${h.date}</td>
+            <td>${faNum(h.basePrice)}</td>
+            <td><strong>${faNum(h.finalPrice)}</strong></td>
+            <td><span class="fg-badge ${s.cls}">${s.txt}</span></td>
+        </tr>`;
+    }).join('');
+}
+
+/* ============================================================
+   پیش‌فاکتور
+   ============================================================ */
+function calcInvoiceRow() {
+    const q = parseFloat(document.getElementById('pi_qty')?.value) || 0;
+    const p = parseFloat(document.getElementById('pi_price')?.value) || 0;
+    const el = document.getElementById('pi_total');
+    if (el) el.value = faNum(q * p);
+}
+
+function generateInvoiceNo() {
+    return 'QUT-D' + (DB.preInvoices.length + 1).toString().padStart(6, '0');
+}
+
+function handlePreinvoiceSubmit(e) {
+    e.preventDefault();
+    if (!hasPerm('preinvoice_create')) return alert('⛔ دسترسی صدور پیش‌فاکتور ندارید');
+    const f = e.target;
+    const customerId = f.customerId.value;
+    const product = f.product.value;
+    const qty = f.quantity.value;
+    const price = f.unitPrice.value;
+    let ok = true;
+    if (!customerId) { showError(f.customerId, 'الزامی'); ok = false; } else showSuccess(f.customerId);
+    if (!product) { showError(f.product, 'الزامی'); ok = false; } else showSuccess(f.product);
+    if (!qty || parseFloat(qty) <= 0) { showError(f.quantity, 'باید > 0'); ok = false; } else showSuccess(f.quantity);
+    if (!price || parseFloat(price) <= 0) { showError(f.unitPrice, 'باید > 0'); ok = false; } else showSuccess(f.unitPrice);
+    if (!ok) return alert('❌ خطاهای فرم');
+
+    const c = DB.customers.find(x => x.id === parseInt(customerId));
+    const q = parseFloat(qty);
+    const pu = parseFloat(price);
+    const total = q * pu;
+    const tax = Math.round(total * 0.10);
+    const final = total + tax;
+
+    const rec = {
+        id: Date.now(),
+        invoiceNo: document.getElementById('pi_invoiceNo').value,
+        date: f.date.value || todayPersian(),
+        customerId: parseInt(customerId),
+        product,
+        quantity: q,
+        unitPrice: pu,
+        total,
+        tax,
+        finalTotal: final,
+        status: 'pending_approval'
+    };
+    DB.preInvoices.unshift(rec);
+    DB.approvals.unshift({
+        id: Date.now() + 1,
+        type: 'preinvoice',
+        refId: rec.id,
+        title: `تایید پیش‌فاکتور ${rec.invoiceNo} - ${c.companyName}`,
+        amount: final,
+        requestedBy: CURRENT_USER?.fullName || '?',
+        assignedTo: 'مدیر بازرگانی',
+        status: 'pending',
+        date: rec.date,
+        note: ''
+    });
+    saveDB();
+    renderPreInvoices();
+    renderApprovals();
+    renderDashboard();
+    f.reset();
+    f.querySelectorAll('input, select, textarea').forEach(el => clearError(el));
+    document.getElementById('pi_invoiceNo').value = generateInvoiceNo();
+    document.getElementById('pi_date').value = todayPersian();
+    document.getElementById('pi_total').value = '';
+    alert('✅ پیش‌فاکتور صادر شد.');
+}
+
+function renderPreInvoices() {
+    const tbody = document.getElementById('preinvoiceTable');
+    if (!tbody) return;
+    if (DB.preInvoices.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" class="fg-empty">پیش‌فاکتوری نیست</td></tr>';
+        return;
+    }
+    const canSeePrice = hasPerm('preinvoice_price');
+    const sMap = {
+        pending_approval: { txt: 'در انتظار', cls: 'fg-badge-warning' },
+        approved: { txt: 'تایید', cls: 'fg-badge-success' },
+        rejected: { txt: 'رد', cls: 'fg-badge-danger' }
+    };
+    tbody.innerHTML = DB.preInvoices.map((p, i) => {
+        const c = DB.customers.find(x => x.id === p.customerId);
+        const s = sMap[p.status] || sMap.pending_approval;
+        return `<tr>
+            <td>${i + 1}</td>
+            <td><strong>${p.invoiceNo}</strong></td>
+            <td>${p.date}</td>
+            <td>${c ? c.companyName : '?'}</td>
+            <td>${p.product}</td>
+            <td>${faNum(p.quantity)}</td>
+            <td>${canSeePrice ? faNum(p.finalTotal) : '***'}</td>
+            <td><span class="fg-badge ${s.cls}">${s.txt}</span></td>
+            <td>
+                <button class="fg-action-btn info" onclick="showInvoice(${p.id})" title="مشاهده"><i class="fas fa-eye"></i></button>
+                ${hasPerm('preinvoice_create') ? `<button class="fg-action-btn danger" onclick="deletePreInvoice(${p.id})" title="حذف"><i class="fas fa-trash"></i></button>` : ''}
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function deletePreInvoice(id) {
+    if (!hasPerm('preinvoice_create')) return alert('⛔ دسترسی ندارید');
+    if (!confirm('حذف؟')) return;
+    DB.preInvoices = DB.preInvoices.filter(p => p.id !== id);
+    DB.approvals = DB.approvals.filter(a => a.refId !== id);
+    saveDB();
+    renderPreInvoices();
+    renderApprovals();
+    renderDashboard();
+}
+
+function showInvoice(id) {
+    if (!hasPerm('preinvoice')) return alert('⛔ دسترسی ندارید');
+    const p = DB.preInvoices.find(x => x.id === id);
+    if (!p) return;
+    const c = DB.customers.find(x => x.id === p.customerId);
+    const canSeePrice = hasPerm('preinvoice_price');
+    const seller = {
+        name: 'شیمی فرایند دنا',
+        economic: '14010086469',
+        national: '14010086469',
+        reg: '579035',
+        postal: '1481816568',
+        phone: '021-46100785',
+        address: 'تهران - محله فردوس - خیابان شهید ابراهیمی پور - سبالی شمالی - زرگراه آیت اله کاشانی - پلاک 432 - ساختمان افرا - طبقه اول - واحد 206'
+    };
+
+    document.getElementById('invoiceContent').innerHTML = `
+        <div class="fg-invoice" id="printableInvoice">
+            <div class="fg-invoice-head">
+                <h2>پیش‌فاکتور فروش کالا</h2>
+                <div class="fg-invoice-meta">
+                    <div><strong>شماره:</strong> ${p.invoiceNo}</div>
+                    <div><strong>تاریخ:</strong> ${p.date}</div>
+                </div>
+            </div>
+            <div class="fg-invoice-section">
+                <div class="fg-invoice-section-title">مشخصات فروشنده</div>
+                <div class="fg-invoice-section-body">
+                    <div class="row">
+                        <strong>نام:</strong><span>${seller.name}</span>
+                        <strong>شماره اقتصادی:</strong><span>${seller.economic}</span>
+                    </div>
+                    <div class="row">
+                        <strong>ثبت/ملی:</strong><span>${seller.reg} / ${seller.national}</span>
+                        <strong>کد پستی:</strong><span>${seller.postal}</span>
+                    </div>
+                    <div class="row">
+                        <strong>آدرس:</strong><span style="grid-column: span 3;">${seller.address}</span>
+                    </div>
+                    <div class="row">
+                        <strong>تلفن:</strong><span style="grid-column: span 3;">${seller.phone}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fg-invoice-section">
+                <div class="fg-invoice-section-title">مشخصات خریدار</div>
+                <div class="fg-invoice-section-body">
+                    <div class="row">
+                        <strong>نام:</strong><span>${c ? c.companyName : '-'}</span>
+                        <strong>شماره اقتصادی:</strong><span>${c?.economicCode || '-'}</span>
+                    </div>
+                    <div class="row">
+                        <strong>شناسه ملی:</strong><span>${c?.nationalId || '-'}</span>
+                        <strong>شماره ثبت:</strong><span>${c?.regNumber || '-'}</span>
+                    </div>
+                    <div class="row">
+                        <strong>کد پستی:</strong><span>${c?.postalCode || '-'}</span>
+                        <strong>تلفن:</strong><span>${c?.phone || '-'}</span>
+                    </div>
+                    <div class="row">
+                        <strong>آدرس:</strong><span style="grid-column: span 3;">${c?.address || '-'}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fg-invoice-section">
+                <div class="fg-invoice-section-title">مشخصات کالا</div>
+                <table class="fg-invoice-table">
+                    <thead>
+                        <tr>
+                            <th>ردیف</th><th>شرح کالا</th><th>مقدار</th><th>واحد</th>
+                            <th>مبلغ واحد (ریال)</th><th>مبلغ کل (ریال)</th><th>تخفیف</th>
+                            <th>جمع مالیات</th><th>جمع مبلغ کل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>${p.product}</td>
+                            <td>${faNum(p.quantity)}</td>
+                            <td>کیلوگرم</td>
+                            <td>${canSeePrice ? faNum(p.unitPrice) : '***'}</td>
+                            <td>${canSeePrice ? faNum(p.total) : '***'}</td>
+                            <td>0</td>
+                            <td>${canSeePrice ? faNum(p.tax) : '***'}</td>
+                            <td>${canSeePrice ? faNum(p.finalTotal) : '***'}</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4">جمع کل</td>
+                            <td>-</td>
+                            <td>${canSeePrice ? faNum(p.total) : '***'}</td>
+                            <td>0</td>
+                            <td>${canSeePrice ? faNum(p.tax) : '***'}</td>
+                            <td>${canSeePrice ? faNum(p.finalTotal) : '***'}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="fg-invoice-section-body" style="margin-top:6px;">
+                    <div class="row">
+                        <strong>شرایط فروش:</strong><span>نقدی</span>
+                        <strong>قابل پرداخت:</strong><span><strong>${canSeePrice ? faNum(p.finalTotal) + ' ریال' : '***'}</strong></span>
+                    </div>
+                </div>
+            </div>
+            <div class="fg-invoice-section">
+                <div class="fg-invoice-section-title">ملاحظات</div>
+                <div class="fg-invoice-section-body" style="line-height:2;">
+                    * منظور از حلال؛ DOP می باشد.<br>
+                    * نحوه پرداخت: 100% نقد.<br>
+                    * محل تحویل: درب انبار.<br>
+                    * اعتبار 1 روز کاری.<br>
+                    * زمان تحویل: 2 روز بعد از واریز وجه.
+                </div>
+            </div>
+            <div class="fg-invoice-section">
+                <div class="fg-invoice-section-title">اطلاعات بانکی</div>
+                <div class="fg-invoice-section-body">
+                    اطلاعات مالی شرکت شیمی فرایند دنا - شعبه اصفهانی<br>
+                    صاحب حساب: شرکت شیمی فرایند دنا<br>
+                    شماره حساب: 116558661004<br>
+                    شماره شبا: IR340190000000116558661004
+                </div>
+            </div>
+        </div>
+    `;
+    openModal('modalInvoice');
+}
+
+/* ============================================================
+   تاییدات
+   ============================================================ */
+function renderApprovals() {
+    const el = document.getElementById('approvalList');
+    if (!el) return;
+    const canApprove = hasPerm('approvals');
+    if (DB.approvals.length === 0) {
+        el.innerHTML = '<div class="fg-empty"><i class="fas fa-check-circle" style="font-size:30px; color:var(--fg-success);"></i><br>موردی در انتظار نیست</div>';
+        return;
+    }
+    const canSeePrice = hasPerm('preinvoice_price');
+    el.innerHTML = DB.approvals.map(a => `
+        <div class="fg-ticket" style="border-right-color:var(--fg-warning);">
+            <div class="fg-ticket-head">
+                <div class="title"><i class="fas fa-clock"></i> ${a.title}</div>
+                <div class="date">${a.date}</div>
+            </div>
+            <div class="fg-ticket-body">
+                <div style="margin-bottom:6px;">
+                    <strong>درخواست‌کننده:</strong> ${a.requestedBy} |
+                    <strong>مبلغ:</strong> ${canSeePrice ? faNum(a.amount) + ' ریال' : '***'}
+                </div>
+                ${canApprove ? `
+                    <div style="display:flex; gap:8px; margin-top:10px;">
+                        <button class="fg-btn fg-btn-success" onclick="approveItem(${a.id})"><i class="fas fa-check"></i> تایید</button>
+                        <button class="fg-btn fg-btn-danger" onclick="rejectItem(${a.id})"><i class="fas fa-times"></i> رد</button>
+                    </div>
+                ` : '<div style="font-size:11px;color:var(--fg-text-muted);margin-top:8px;">فقط مدیر بازرگانی می‌تواند تایید کند</div>'}
+            </div>
+        </div>
+    `).join('');
+}
+
+function approveItem(id) {
+    if (!hasPerm('approvals')) return alert('⛔ دسترسی ندارید');
+    const a = DB.approvals.find(x => x.id === id);
+    if (!a) return;
+    if (a.type === 'price') {
+        const p = DB.solventPrices.find(x => x.id === a.refId);
+        if (p) p.status = 'approved';
+    }
+    if (a.type === 'wax_price') {
+        const h = DB.waxPriceHistory.find(x => x.id === a.refId);
+        if (h) h.status = 'approved';
+    }
+    if (a.type === 'preinvoice') {
+        const pi = DB.preInvoices.find(x => x.id === a.refId);
+        if (pi) pi.status = 'approved';
+    }
+    DB.approvals = DB.approvals.filter(x => x.id !== id);
+    saveDB();
+    renderApprovals();
+    renderSolventPrices();
+    renderWaxPriceHistory();
+    renderPreInvoices();
+    alert('✅ تایید شد.');
+}
+
+function rejectItem(id) {
+    if (!hasPerm('approvals')) return alert('⛔ دسترسی ندارید');
+    const a = DB.approvals.find(x => x.id === id);
+    if (!a) return;
+    const note = prompt('دلیل رد:', 'قیمت بالاتری لحاظ کنید.');
+    if (note === null) return;
+    DB.tickets.unshift({
+        id: Date.now(),
+        title: `اصلاح: ${a.title}`,
+        preinvoiceNo: '-',
+        assignTo: 'کارشناس فروش',
+        body: note,
+        from: 'مدیر بازرگانی',
+        status: 'open',
+        date: todayPersian()
+    });
+    if (a.type === 'price') {
+        const p = DB.solventPrices.find(x => x.id === a.refId);
+        if (p) p.status = 'rejected';
+    }
+    if (a.type === 'wax_price') {
+        const h = DB.waxPriceHistory.find(x => x.id === a.refId);
+        if (h) h.status = 'rejected';
+    }
+    if (a.type === 'preinvoice') {
+        const pi = DB.preInvoices.find(x => x.id === a.refId);
+        if (pi) pi.status = 'rejected';
+    }
+    DB.approvals = DB.approvals.filter(x => x.id !== id);
+    saveDB();
+    renderApprovals();
+    renderSolventPrices();
+    renderWaxPriceHistory();
+    renderPreInvoices();
+    renderTickets();
+    alert('❌ رد شد.');
+}
+
+/* ============================================================
+   تیکت‌ها
+   ============================================================ */
+function handleTicketSubmit(e) {
+    e.preventDefault();
+    if (!hasPerm('tickets')) return alert('⛔ دسترسی ندارید');
+    const fd = new FormData(e.target);
+    DB.tickets.unshift({
+        id: Date.now(),
+        title: fd.get('title'),
+        preinvoiceNo: fd.get('preinvoiceNo') || '-',
+        assignTo: fd.get('assignTo'),
+        body: fd.get('body'),
+        from: CURRENT_USER?.fullName || '?',
+        status: 'open',
+        date: todayPersian()
+    });
+    saveDB();
+    renderTickets();
+    e.target.reset();
+    alert('✅ تیکت ثبت شد.');
+}
+
+function renderTickets() {
+    const el = document.getElementById('ticketList');
+    if (!el) return;
+    if (DB.tickets.length === 0) {
+        el.innerHTML = '<div class="fg-empty">تیکتی نیست</div>';
+        return;
+    }
+    el.innerHTML = DB.tickets.map(t => `
+        <div class="fg-ticket">
+            <div class="fg-ticket-head">
+                <div class="title"><i class="fas fa-ticket-alt"></i> ${t.title}</div>
+                <div class="date">${t.date}</div>
+            </div>
+            <div class="fg-ticket-body">
+                <div><strong>گیرنده:</strong> ${t.assignTo} | <strong>فرستنده:</strong> ${t.from}</div>
+                <div style="margin-top:6px; padding:8px; background:#F8F9FA; border-radius:6px;">${t.body}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+/* ============================================================
+   چارت سازمانی
+   ============================================================ */
+function renderOrgChart() {
+    const el = document.getElementById('orgTree');
+    if (!el) return;
+    const org = {
+        name: 'مدیرعامل',
+        role: 'رئیس سازمان',
+        children: [
+            {
+                name: 'مدیر بازرگانی و فروش',
+                role: 'تایید نهایی قیمت',
+                children: [
+                    { name: 'کارشناس فروش', role: 'تعیین قیمت اولیه', children: [] },
+                    { name: 'کارشناس بازاریابی', role: 'استعلام قیمت', children: [] }
+                ]
+            },
+            {
+                name: 'مدیر تولید',
+                role: 'اجرای سفارش',
+                children: [
+                    { name: 'واحد تولید', role: 'ساخت محصول', children: [] }
+                ]
+            },
+            {
+                name: 'مدیر مالی',
+                role: 'دریافت وجه',
+                children: [
+                    { name: 'واحد مالی', role: 'ثبت صورت وضعیت', children: [] }
+                ]
+            }
+        ]
+    };
+    el.innerHTML = '<ul>' + renderOrgNode(org) + '</ul>';
+}
+
+function renderOrgNode(node) {
+    const initial = (node.name || '؟').charAt(0);
+    return `
+        <li>
+            <div class="fg-org-node">
+                <div class="avatar">${initial}</div>
+                <div class="info">
+                    <strong>${node.name}</strong>
+                    <span>${node.role}</span>
+                </div>
+            </div>
+            ${node.children && node.children.length
+                ? '<ul>' + node.children.map(renderOrgNode).join('') + '</ul>'
+                : ''}
+        </li>
+    `;
+}
+
+/* ============================================================
+   نقش‌ها
+   ============================================================ */
+function renderRolesList() {
+    const el = document.getElementById('rolesList');
+    if (!el) return;
+    if (DB.roles.length === 0) {
+        el.innerHTML = '<div class="fg-empty">نقشی نیست</div>';
+        return;
+    }
+    el.innerHTML = DB.roles.map(r => `
+        <div class="role-chip">
+            <i class="fas fa-user-tag" style="color:var(--fg-primary-light);"></i>
+            <strong>${r.name}</strong>
+            <span style="color:var(--fg-text-muted);">(${r.perms.length})</span>
+            ${!r.system
+                ? `<span class="remove" onclick="deleteRole('${r.id}')"><i class="fas fa-times-circle"></i></span>`
+                : '<i class="fas fa-lock" style="color:var(--fg-text-muted); font-size:10px;"></i>'}
+            <span class="remove" onclick="openRoleModal('${r.id}')" style="color:var(--fg-primary-light);"><i class="fas fa-edit"></i></span>
+        </div>
+    `).join('');
+}
+
+function renderRolePermGrid(selectedPerms = []) {
+    const grid = document.getElementById('rolePermGrid');
+    if (!grid) return;
+    grid.innerHTML = PERMISSIONS.map(p => `
+        <div class="perm-item ${p.sensitive ? 'sensitive' : ''}">
+            <input type="checkbox" id="role_perm_${p.key}" value="${p.key}" ${selectedPerms.includes(p.key) ? 'checked' : ''}>
+            <label for="role_perm_${p.key}"><i class="fas ${p.icon}"></i> ${p.label}</label>
+        </div>
+    `).join('');
+}
+
+function openRoleModal(roleId = null) {
+    if (!hasPerm('users')) return alert('⛔ دسترسی ندارید');
+    const role = roleId ? DB.roles.find(r => r.id === roleId) : null;
+    document.getElementById('editRoleId').value = roleId || '';
+    document.getElementById('roleName').value = role ? role.name : '';
+    document.getElementById('roleDesc').value = role ? role.desc : '';
+    document.getElementById('roleModalTitle').textContent = role ? 'ویرایش: ' + role.name : 'تعریف نقش جدید';
+    renderRolePermGrid(role ? role.perms : []);
+    openModal('modalRole');
+}
+
+function selectAllRolePerms(checked) {
+    document.querySelectorAll('#rolePermGrid input[type="checkbox"]').forEach(cb => cb.checked = checked);
+}
+
+function saveRole() {
+    if (!hasPerm('users')) return alert('⛔ دسترسی ندارید');
+    const name = document.getElementById('roleName').value.trim();
+    if (!name) return alert('نام نقش الزامی');
+    const desc = document.getElementById('roleDesc').value.trim();
+    const perms = Array.from(document.querySelectorAll('#rolePermGrid input:checked')).map(cb => cb.value);
+    const editId = document.getElementById('editRoleId').value;
+
+    if (editId) {
+        const r = DB.roles.find(x => x.id === editId);
+        if (r) {
+            r.name = name;
+            r.desc = desc;
+            r.perms = perms;
+        }
+        alert('✅ نقش ویرایش شد.');
+    } else {
+        DB.roles.push({ id: 'role_' + Date.now(), name, desc, perms, system: false });
+        alert('✅ نقش جدید اضافه شد.');
+    }
+    saveDB();
+    renderRolesList();
+    fillUserRoleSelect();
+    closeModal('modalRole');
+}
+
+function deleteRole(id) {
+    if (!hasPerm('users')) return alert('⛔ دسترسی ندارید');
+    const users = DB.users.filter(u => u.roleId === id);
+    if (users.length > 0) return alert(`⚠️ ${users.length} کاربر این نقش را دارند. اول تغییر دهید.`);
+    if (!confirm('حذف؟')) return;
+    DB.roles = DB.roles.filter(r => r.id !== id);
+    saveDB();
+    renderRolesList();
+    fillUserRoleSelect();
+}
+
+/* ============================================================
+   کاربران
+   ============================================================ */
+function fillUserRoleSelect() {
+    const sel = document.getElementById('userRoleSelect');
+    if (!sel) return;
+    sel.innerHTML = '<option value="">انتخاب نقش...</option>' +
+        DB.roles.map(r => `<option value="${r.id}">${r.name}${r.desc ? ' - ' + r.desc : ''}</option>`).join('');
+}
+
+function renderUserPermGrid(perms) {
+    const grid = document.getElementById('userPermGrid');
+    if (!grid) return;
+    grid.innerHTML = PERMISSIONS.map(p => `
+        <div class="perm-item ${p.sensitive ? 'sensitive' : ''}">
+            <input type="checkbox" id="user_perm_${p.key}" value="${p.key}" ${perms.includes(p.key) ? 'checked' : ''}>
+            <label for="user_perm_${p.key}"><i class="fas ${p.icon}"></i> ${p.label}</label>
+        </div>
+    `).join('');
+}
+
+function onUserRoleChange() {
+    const roleId = document.getElementById('userRoleSelect').value;
+    if (!roleId) {
+        renderUserPermGrid([]);
+        return;
+    }
+    const role = DB.roles.find(r => r.id === roleId);
+    if (role) renderUserPermGrid(role.perms);
+}
+
+function selectAllPerms(checked) {
+    document.querySelectorAll('#userPermGrid input[type="checkbox"]').forEach(cb => cb.checked = checked);
+}
+
+function inheritRolePerms() {
+    onUserRoleChange();
+    alert('✅ دسترسی‌ها به نقش بازگشت.');
+}
+
+function handleUserSubmit(e) {
+    e.preventDefault();
+    if (!hasPerm('users')) return alert('⛔ دسترسی ندارید');
+    const f = e.target;
+    const fullName = f.fullName.value.trim();
+    const username = f.username.value.trim();
+    const password = f.password.value.trim();
+    const roleId = f.roleId.value;
+    if (!fullName || !username || !password || !roleId) {
+        return alert('❌ همه فیلدهای ستاره‌دار الزامی');
+    }
+
+    const customPerms = Array.from(document.querySelectorAll('#userPermGrid input:checked')).map(cb => cb.value);
+    const role = DB.roles.find(r => r.id === roleId);
+    const isSameAsRole = role && role.perms.length === customPerms.length &&
+                          role.perms.every(p => customPerms.includes(p));
+
+    const editId = document.getElementById('editUserId').value;
+    const dup = DB.users.find(u => u.username === username && u.id !== parseInt(editId));
+    if (dup) return alert('❌ نام کاربری تکراری');
+
+    if (editId) {
+        const u = DB.users.find(x => x.id === parseInt(editId));
+        if (u) {
+            u.fullName = fullName;
+            u.username = username;
+            u.password = password;
+            u.roleId = roleId;
+            u.status = f.status.value;
+            u.customPerms = isSameAsRole ? null : customPerms;
+        }
+        alert('✅ ویرایش شد.');
+        cancelUserEdit();
+    } else {
+        DB.users.push({
+            id: Date.now(),
+            fullName,
+            username,
+            password,
+            roleId,
+            status: f.status.value,
+            customPerms: isSameAsRole ? null : customPerms
+        });
+        alert('✅ کاربر اضافه شد.');
+    }
+    saveDB();
+    renderUsers();
+    f.reset();
+    document.getElementById('userPermGrid').innerHTML = '';
+}
+
+function editUser(id) {
+    if (!hasPerm('users')) return alert('⛔ دسترسی ندارید');
+    const u = DB.users.find(x => x.id === id);
+    if (!u) return;
+    const f = document.getElementById('userForm');
+    f.fullName.value = u.fullName;
+    f.username.value = u.username;
+    f.password.value = u.password;
+    f.roleId.value = u.roleId;
+    f.status.value = u.status;
+    document.getElementById('editUserId').value = id;
+    document.getElementById('userFormTitle').textContent = 'ویرایش: ' + u.fullName;
+    document.getElementById('submitUserBtnText').textContent = 'ذخیره';
+    document.getElementById('cancelEditUser').style.display = 'inline-flex';
+    renderUserPermGrid(getUserPermissions(u));
+    f.scrollIntoView({ behavior: 'smooth' });
+}
+
+function cancelUserEdit() {
+    const f = document.getElementById('userForm');
+    f.reset();
+    document.getElementById('editUserId').value = '';
+    document.getElementById('userFormTitle').textContent = 'افزودن کاربر جدید';
+    document.getElementById('submitUserBtnText').textContent = 'افزودن کاربر';
+    document.getElementById('cancelEditUser').style.display = 'none';
+    document.getElementById('userPermGrid').innerHTML = '';
+}
+
+function renderUsers() {
+    const tbody = document.getElementById('usersTable');
+    if (!tbody) return;
+    if (DB.users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="fg-empty">کاربری نیست</td></tr>';
+        return;
+    }
+    tbody.innerHTML = DB.users.map((u, i) => {
+        const role = DB.roles.find(r => r.id === u.roleId);
+        const permsCount = getUserPermissions(u).length;
+        const isCustom = u.customPerms && Array.isArray(u.customPerms);
+        return `<tr>
+            <td>${i + 1}</td>
+            <td><strong>${u.fullName}</strong></td>
+            <td>${u.username}</td>
+            <td><span class="fg-badge fg-badge-primary">${role ? role.name : '?'}</span></td>
+            <td><span class="fg-badge ${isCustom ? 'fg-badge-warning' : 'fg-badge-secondary'}">
+                ${permsCount} مورد ${isCustom ? '(اختصاصی)' : '(از نقش)'}</span></td>
+            <td><span class="fg-badge ${u.status === 'active' ? 'fg-badge-success' : 'fg-badge-danger'}">${u.status === 'active' ? 'فعال' : 'غیرفعال'}</span></td>
+            <td>
+                <button class="fg-action-btn" onclick="editUser(${u.id})" title="ویرایش"><i class="fas fa-edit"></i></button>
+                <button class="fg-action-btn danger" onclick="deleteUser(${u.id})" title="حذف"><i class="fas fa-trash"></i></button>
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function deleteUser(id) {
+    if (!hasPerm('users')) return alert('⛔ دسترسی ندارید');
+    if (id === 1) return alert('⚠️ admin قابل حذف نیست');
+    if (CURRENT_USER && CURRENT_USER.id === id) return alert('⚠️ خودتان را نمی‌توانید حذف کنید');
+    if (!confirm('حذف؟')) return;
+    DB.users = DB.users.filter(u => u.id !== id);
+    saveDB();
+    renderUsers();
+}
+
+/* ============================================================
+   داشبورد
+   ============================================================ */
+function renderDashboard() {
+    const el1 = document.getElementById('statCustomers');
+    const el2 = document.getElementById('statRequests');
+    const el3 = document.getElementById('statPreInvoices');
+    const el4 = document.getElementById('statSales');
+    if (el1) el1.textContent = DB.customers.length;
+    if (el2) el2.textContent = DB.requests.filter(r => r.status !== 'sent').length;
+    if (el3) el3.textContent = DB.preInvoices.length;
+    const totalSales = DB.preInvoices.reduce((s, p) => s + (p.finalTotal || 0), 0);
+    if (el4) {
+        if (hasPerm('preinvoice_price')) el4.textContent = faNum(totalSales) + ' ریال';
+        else el4.textContent = '***';
+    }
+
+    const act = document.getElementById('recentActivity');
+    if (!act) return;
+    const items = [];
+    if (DB.requests.length) {
+        const r = DB.requests[0];
+        const c = DB.customers.find(x => x.id === r.customerId);
+        items.push(`
+            <div style="padding:8px 0; border-bottom:1px solid var(--fg-border);">
+                <i class="fas fa-clipboard-list" style="color:var(--fg-info);"></i>
+                درخواست ${r.productType} - ${faNum(r.quantity)} kg
+                ${c ? ' - ' + c.companyName : ''}
+                <small style="color:var(--fg-text-muted);">(${r.date})</small>
+            </div>
+        `);
+    }
+    if (DB.preInvoices.length) {
+        const p = DB.preInvoices[0];
+        const c = DB.customers.find(x => x.id === p.customerId);
+        items.push(`
+            <div style="padding:8px 0; border-bottom:1px solid var(--fg-border);">
+                <i class="fas fa-file-invoice" style="color:var(--fg-success);"></i>
+                پیش‌فاکتور ${p.invoiceNo} - ${c ? c.companyName : ''}
+                <small style="color:var(--fg-text-muted);">(${p.date})</small>
+            </div>
+        `);
+    }
+    if (DB.approvals.length) {
+        items.push(`
+            <div style="padding:8px 0;">
+                <i class="fas fa-clock" style="color:var(--fg-warning);"></i>
+                ${DB.approvals.length} مورد در انتظار تایید
+            </div>
+        `);
+    }
+    act.innerHTML = items.length ? items.join('') : '<div class="fg-empty">فعالیتی نیست</div>';
+}
+
+/* ============================================================
+   CSV
+   ============================================================ */
+function exportExcel() {
+    if (DB.customers.length === 0) return alert('داده‌ای نیست');
+    let csv = '\uFEFFردیف,نام شرکت,شماره اقتصادی,شناسه ملی,شماره ثبت,کد پستی,تلفن,موبایل,نوع فروش,رابط,آدرس\n';
+    DB.customers.forEach((c, i) => {
+        csv += `${i + 1},"${c.companyName}","${c.economicCode || ''}","${c.nationalId || ''}","${c.regNumber || ''}","${c.postalCode || ''}","${c.phone || ''}","${c.mobile || ''}","${c.saleType === 'formal' ? 'رسمی' : 'غیررسمی'}","${c.contactPerson || ''}","${c.address || ''}"\n`;
+    });
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'customers_' + todayPersian().replace(/\//g, '-') + '.csv';
+    link.click();
+}
+
+/* ============================================================
+   Refresh All
+   ============================================================ */
+function refreshAllViews() {
+    fillCustomerSelects();
+    fillProductSelects();
+    renderProductsTable();
+    renderCustomers();
+    renderRequests();
+    renderSolventPrices();
+    renderWaxTable();
+    renderWaxPriceHistory();
+    renderPreInvoices();
+    renderApprovals();
+    renderTickets();
+    renderOrgChart();
+    renderUsers();
+    renderRolesList();
+    fillUserRoleSelect();
+    renderDashboard();
+    calcSolvent();
+    applyPermissions();
+}
+
+/* ============================================================
+   راه‌اندازی
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+    loadDB();
+    loadTheme();
+    updateClock();
+    setInterval(updateClock, 1000);
+    setupNav();
+
+    populateDateSelect('req_date');
+    const sd = document.getElementById('solventDate');
+    if (sd) sd.value = todayPersian();
+    const pd = document.getElementById('pi_date');
+    if (pd) pd.value = todayPersian();
+    const piNo = document.getElementById('pi_invoiceNo');
+    if (piNo) piNo.value = generateInvoiceNo();
+
+    // اتصال Event Listeners
+    document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
+    document.getElementById('customerForm')?.addEventListener('submit', handleCustomerSubmit);
+    document.getElementById('requestForm')?.addEventListener('submit', handleRequestSubmit);
+    document.getElementById('solventPriceForm')?.addEventListener('submit', handleSolventSubmit);
+    document.getElementById('waxPriceForm')?.addEventListener('submit', handleWaxPriceSubmit);
+    document.getElementById('preinvoiceForm')?.addEventListener('submit', handlePreinvoiceSubmit);
+    document.getElementById('ticketForm')?.addEventListener('submit', handleTicketSubmit);
+    document.getElementById('userForm')?.addEventListener('submit', handleUserSubmit);
+
+    // اعتبارسنجی زنده
+    document.addEventListener('input', function(e) {
+        const inp = e.target;
+        if (!inp.matches('#customerForm input, #customerForm select')) return;
+        const name = inp.getAttribute('name');
+        if (['economicCode', 'nationalId', 'regNumber', 'postalCode', 'mobile'].includes(name)) {
+            inp.value = inp.value.replace(/[^0-9]/g, '');
+        }
+        if (inp.value.trim().length > 0) validateCustomerField(inp);
+        else clearError(inp);
+    });
+
+    document.getElementById('waxFinalPrice')?.addEventListener('input', calcWaxDiscount);
+
+    // چک لاگین خودکار
+    const loggedIn = checkAutoLogin();
+
+    // رندر اولیه
+    refreshAllViews();
+
+    if (loggedIn) applyPermissions();
+});
+</script>
+</body>
+</html>
